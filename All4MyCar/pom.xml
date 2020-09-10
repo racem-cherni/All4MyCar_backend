@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tn.esprit.spring</groupId>
-	<artifactId>Stage_SA</artifactId>
+	<artifactId>All4MyCar</artifactId>
 	<version>1.0</version>
-	<name>Stage_SA</name>
+	<name>All4MyCar</name>
 	<description>stage_spring_angular</description>
 
 	<properties>
