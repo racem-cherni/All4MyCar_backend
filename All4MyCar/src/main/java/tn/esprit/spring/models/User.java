@@ -1,11 +1,26 @@
 package tn.esprit.spring.models;
 
-import java.util.HashSet; 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -16,7 +31,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 			@UniqueConstraint(columnNames = "username"),
 			@UniqueConstraint(columnNames = "email") 
 		})
-public class User {
+@JsonIgnoreProperties({ "client" })
+public class User implements Serializable { 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,8 +52,7 @@ public class User {
 	
 	private String password;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy="user")
+	@OneToOne
 	private Client client;
 	
 	@JsonIgnore
@@ -111,9 +132,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", client="
-				+ client + ", prestataire=" + prestataire + ", roles=" + roles + "]";
+		return "User [roles=" + roles + "]";
 	}
+
+	
 	
 	
 	

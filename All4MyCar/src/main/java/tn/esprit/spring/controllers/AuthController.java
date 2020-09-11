@@ -1,5 +1,7 @@
 package tn.esprit.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.models.Client;
 import tn.esprit.spring.models.ERole;
+import tn.esprit.spring.models.Prestataire;
 import tn.esprit.spring.models.Role;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.payload.request.LoginRequest;
@@ -136,13 +139,31 @@ public class AuthController {
 
 		user.setRoles(roles);
 		userRepository.save(user);
-		
-		if ( user.getRoles().contains("ROLE_USER")) {
+		Date d = new Date() ;
+		List<Role> list = new ArrayList<>(); 
+	   for (Role t : roles) 
+	    list.add(t); 
+		String l= list.get(0).getName().toString() ;
+		if ( l.equals("ROLE_USER")) {
 			Client client = new Client();
-			client.setUser(user);
 			client.setFirstNameclt(signUpRequest.getUsername());
 			client.setEmailclt(signUpRequest.getEmail());
+			client.setDate_inscrip(d);
 			clientRepository.save(client);
+			user.setClient(client);
+			userRepository.save(user);
+
+		}
+		
+		else if ( l.equals("ROLE_PRESTATAIRE")) {
+			Prestataire pres = new Prestataire();
+			pres.setFirstNamepres(signUpRequest.getUsername());
+			pres.setEmailpres(signUpRequest.getEmail());
+			pres.setDate_inscrip(d);
+			prestataireRepository.save(pres);
+			user.setPrestataire(pres);
+			userRepository.save(user);
+			
 		}
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

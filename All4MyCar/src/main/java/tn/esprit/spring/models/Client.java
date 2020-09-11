@@ -1,20 +1,34 @@
 package tn.esprit.spring.models;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 @Entity
 @Table(	name = "client")
-public class Client {
+@JsonIgnoreProperties({ "user" })
+
+public class Client implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,13 +44,18 @@ public class Client {
 	private Date date_permis;
 	
 	@Temporal(TemporalType.DATE)
-	private Date date_assurance;
+	private Date date_inscrip;
+	
+	
 	
 	private int telclt;
 	private String adresseclt;
 	
-	@OneToOne
-	private User user;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="client")
+	private List<Vehicule> vehicules;
+	
 	
 	public Long getId() {
 		return id;
@@ -57,12 +76,7 @@ public class Client {
 	public void setDate_permis(Date date_permis) {
 		this.date_permis = date_permis;
 	}
-	public Date getDate_assurance() {
-		return date_assurance;
-	}
-	public void setDate_assurance(Date date_assurance) {
-		this.date_assurance = date_assurance;
-	}
+	
 	public String getFirstNameclt() {
 		return firstNameclt;
 	}
@@ -99,11 +113,18 @@ public class Client {
 	public void setAdresseclt(String adresseclt) {
 		this.adresseclt = adresseclt;
 	}
-	public User getUser() {
-		return user;
+	
+	public List<Vehicule> getVehicules() {
+		return vehicules;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setVehicules(List<Vehicule> vehicules) {
+		this.vehicules = vehicules;
+	}
+	public Date getDate_inscrip() {
+		return date_inscrip;
+	}
+	public void setDate_inscrip(Date date_inscrip) {
+		this.date_inscrip = date_inscrip;
 	}
 	
 	

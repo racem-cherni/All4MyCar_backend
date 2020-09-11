@@ -1,11 +1,15 @@
 package tn.esprit.spring.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(	name = "prestataire")
@@ -20,6 +24,9 @@ public class Prestataire {
 	private String adresseprof;
 	private String emailpres;
 	private int telpres;
+	
+	@Temporal(TemporalType.DATE)
+	private Date date_inscrip;
 
 	
 	
@@ -137,6 +144,20 @@ public class Prestataire {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+
+
+	public Date getDate_inscrip() {
+		return date_inscrip;
+	}
+
+
+
+
+	public void setDate_inscrip(Date date_inscrip) {
+		this.date_inscrip = date_inscrip;
 	}
 
 
