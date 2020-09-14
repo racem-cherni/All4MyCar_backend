@@ -13,6 +13,6 @@ import tn.esprit.spring.models.Vehicule_model;
 @CrossOrigin("http://localhost:4200")
 @RepositoryRestResource()
 public interface Vehicule_modelRepository extends JpaRepository<Vehicule_model, Long> {
-
+ 
 	List<Vehicule_model> findByMarqueName(@Param("name") String name);
 }

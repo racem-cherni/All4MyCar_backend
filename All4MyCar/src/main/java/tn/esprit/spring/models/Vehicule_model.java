@@ -16,7 +16,7 @@ public class Vehicule_model {
 	
 	@ManyToOne
 	Vehicule_marque marque;
-	
+	 
 	private String name;
 
 	private String series;

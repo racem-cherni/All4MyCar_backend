@@ -143,7 +143,7 @@ public class Vehicule {
 	}
 
 	public void setModel(Vehicule_model model) {
-		this.model = model;
+		this.model = model; 
 	}
 	
 	

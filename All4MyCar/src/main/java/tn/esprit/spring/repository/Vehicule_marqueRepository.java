@@ -18,7 +18,7 @@ public interface Vehicule_marqueRepository extends JpaRepository<Vehicule_marque
 
 	/*@Query("Select "
 			+ "v from Vehicule_marque v")
-	public List<Vehicule_marque> getVehiculeMarqueModel();*/
+	public List<Vehicule_marque> getVehiculeMarqueModel();*/  
 	
 
 }
