@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,8 +24,12 @@ public class Vehicule {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String marque;
-	private String modele;
+	/*private String marque;
+	private String modele;*/
+	@OneToOne
+	private Vehicule_marque marque;
+	@OneToOne
+	private Vehicule_model model;
 	private int  annee_de_sortie ;
 	@Temporal(TemporalType.DATE)
 	private Date date_assurance;
@@ -51,21 +56,7 @@ public class Vehicule {
 		this.id = id;
 	}
 
-	public String getMarque() {
-		return marque;
-	}
-
-	public void setMarque(String marque) {
-		this.marque = marque;
-	}
-
-	public String getModele() {
-		return modele;
-	}
-
-	public void setModele(String modele) {
-		this.modele = modele;
-	}
+	
 
 	public int getAnnee_de_sortie() {
 		return annee_de_sortie;
@@ -137,6 +128,22 @@ public class Vehicule {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Vehicule_marque getMarque() {
+		return marque;
+	}
+
+	public void setMarque(Vehicule_marque marque) {
+		this.marque = marque;
+	}
+
+	public Vehicule_model getModel() {
+		return model;
+	}
+
+	public void setModel(Vehicule_model model) {
+		this.model = model;
 	}
 	
 	
