@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(	name = "vehicule_marque")
 public class Vehicule_marque {
@@ -19,7 +21,7 @@ public class Vehicule_marque {
 	 
 	private String name;
 
-	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="marque")
 	private List<Vehicule_model> models;
 

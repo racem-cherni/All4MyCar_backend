@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -41,7 +42,7 @@ public class Client implements Serializable {
 	private int CIN ;
 	
 	@Temporal(TemporalType.DATE)
-	private Date date_permis;
+    private Date date_permis;
 	
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
@@ -52,7 +53,7 @@ public class Client implements Serializable {
 	private String adresseclt;
 	
 	
-	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="client")
 	private List<Vehicule> vehicules;
 	

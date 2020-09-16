@@ -12,7 +12,6 @@ import tn.esprit.spring.repository.UserRepository;
 
 
 @Service
-@CrossOrigin(origins = "http://localhost:4200")
 public class ClientServiceImpl implements ClientService {
 	
 	@Autowired

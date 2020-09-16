@@ -60,6 +60,8 @@ public class ClientController {
 		return null;
 		
 	}
+   
+ 
    @GetMapping("/FindclientById")
 	
 	public Client FinduserById() {
@@ -134,24 +136,6 @@ public class ClientController {
 		
 	}
    
-   @PostMapping("/edit_client2/{firstname}")
-	
-  	public String edit_clientttttt (@PathVariable(value = "firstname") String firstname
-  			 ) {
-  	   Client clt = new Client();
-
-  	  clt.setFirstNameclt(firstname);
-  	  System.err.print(firstname);
-  	 /*  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-  		if (principal instanceof UserDetails) {
-  			String userName = ((UserDetails) principal).getUsername();
-  		//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
-  			
-  			return clientservice.edit_client(clientservice.Afficher_client_by_name(userName).getClient(),clt);
-  			
-  		}*/
-  		return null;
-  		
-  	}
+  
 
 }
