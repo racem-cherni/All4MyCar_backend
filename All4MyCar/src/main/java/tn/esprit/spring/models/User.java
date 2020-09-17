@@ -55,8 +55,8 @@ public class User implements Serializable {
 	@OneToOne
 	private Client client;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy="user")
+
+	@OneToOne
 	private Prestataire prestataire;
 
 	@ManyToMany(fetch = FetchType.LAZY)

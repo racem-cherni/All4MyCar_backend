@@ -24,7 +24,8 @@ public class Prestataire {
 	private String adresseprof;
 	private String emailpres;
 	private int telpres;
-	
+	private String photopres ;
+	private int CIN ;
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
 
@@ -158,6 +159,34 @@ public class Prestataire {
 
 	public void setDate_inscrip(Date date_inscrip) {
 		this.date_inscrip = date_inscrip;
+	}
+
+
+
+
+	public String getPhotopres() {
+		return photopres;
+	}
+
+
+
+
+	public void setPhotopres(String photopres) {
+		this.photopres = photopres;
+	}
+
+
+
+
+	public int getCIN() {
+		return CIN;
+	}
+
+
+
+
+	public void setCIN(int cIN) {
+		CIN = cIN;
 	}
 
 
