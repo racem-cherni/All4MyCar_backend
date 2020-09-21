@@ -3,9 +3,14 @@ package tn.esprit.spring.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -90,7 +95,7 @@ public class ClientController {
 		
 	}*/
    
-   private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/upload";
+   private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/resources";	
 
    @PostMapping("/edit_client1/{firstname}/{lastname}/{email}/{adresse}/{telnum}/{cin}/{datepermis}")
 	
@@ -135,6 +140,18 @@ public class ClientController {
 		return null;
 		
 	}
+   
+   @GetMapping(value = "/apii/image/logo/{image}")
+   public ResponseEntity<InputStreamResource> getclientImage(@PathVariable(value = "image") String image ) throws IOException {
+
+       ClassPathResource imgFile = new ClassPathResource(image);
+
+       return ResponseEntity
+               .ok()
+               .contentType(MediaType.IMAGE_JPEG)
+               .body(new InputStreamResource(imgFile.getInputStream()));
+   }
+
    
   
 

@@ -3,12 +3,18 @@ package tn.esprit.spring.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.http.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -91,15 +97,13 @@ public class PrestataireControlller {
 		
 	}*/
    
-   private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/upload";
+   private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/resources";	
 
-	
-
-   @PostMapping("/edit_prestataire1/{firstNamepres}/{lastNamepres}/{adressepres}/{adresseprof}/{emailpres}/{telpres}")
+   @PostMapping("/edit_prestataire1/{firstNamepres}/{lastNamepres}/{adressepres}/{adresseprof}/{emailpres}/{telpres}/{specialisations}/{cin}")
 	
 	public String edit_presss(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
-			@PathVariable(value = "adresseprof") String adresseprof , @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,
- @RequestParam("file") MultipartFile file
+			@PathVariable(value = "adresseprof") String adresseprof , @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
+			@PathVariable(value ="cin")  int cin,@RequestParam("file") MultipartFile file
 			 )
    {
 	   Prestataire pres = new Prestataire();
@@ -131,6 +135,8 @@ public class PrestataireControlller {
 	       pres.setEmailpres(emailpres);
 
 	       pres.setTelpres(telpres);
+	       pres.setSpecialisations(specialisation);
+	       pres.setCIN(cin);
 	        pres.setPhotopres(file.getOriginalFilename());
 	  // clt.setPhotoclt(file.getOriginalFilename());
 	   
@@ -145,6 +151,17 @@ public class PrestataireControlller {
 		return null;
 		
 	}
+   
+   @GetMapping(value = "/api/image/logo/{image}")
+   public ResponseEntity<InputStreamResource> getImage(@PathVariable(value = "image") String image ) throws IOException {
+
+       ClassPathResource imgFile = new ClassPathResource(image);
+
+       return ResponseEntity
+               .ok()
+               .contentType(MediaType.IMAGE_JPEG)
+               .body(new InputStreamResource(imgFile.getInputStream()));
+   }
    
   
 }
