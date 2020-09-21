@@ -25,15 +25,16 @@ public class Prestataire {
 	private String emailpres;
 	private int telpres;
 	private String photopres ;
+	
 	private int CIN ;
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
+	private String specialisations ;
 
 	
 	
 	
-	@OneToOne
-	private User user;
+	
 
 
 
@@ -136,16 +137,7 @@ public class Prestataire {
 
 
 
-	public User getUser() {
-		return user;
-	}
-
-
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 
 
 
@@ -187,6 +179,20 @@ public class Prestataire {
 
 	public void setCIN(int cIN) {
 		CIN = cIN;
+	}
+
+
+
+
+	public String getSpecialisations() {
+		return specialisations;
+	}
+
+
+
+
+	public void setSpecialisations(String specialisations) {
+		this.specialisations = specialisations;
 	}
 
 
