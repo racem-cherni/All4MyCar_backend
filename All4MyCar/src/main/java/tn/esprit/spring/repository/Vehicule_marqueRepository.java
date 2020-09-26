@@ -20,5 +20,5 @@ public interface Vehicule_marqueRepository extends JpaRepository<Vehicule_marque
 			+ "v from Vehicule_marque v")
 	public List<Vehicule_marque> getVehiculeMarqueModel();*/  
 	
-
+  //
 }
