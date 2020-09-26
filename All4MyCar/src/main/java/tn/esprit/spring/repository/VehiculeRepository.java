@@ -1,6 +1,7 @@
 package tn.esprit.spring.repository;
 
-import java.util.List;
+import java.util.List; 
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
@@ -20,6 +21,10 @@ public interface VehiculeRepository extends JpaRepository<Vehicule, Long>  {
 	List<Vehicule> findByClientId(@Param("id") long id);
 
 	void deleteById(@Param("id") long id);
+	
+	
+	 Optional<Vehicule>  findById(Long arg0) ;
+
 
 	
 	//List<Vehicule> findByClientId(Long id);

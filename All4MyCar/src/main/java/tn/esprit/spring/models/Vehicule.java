@@ -53,6 +53,7 @@ public class Vehicule implements Serializable {
 	private String assureur;
 	private String num_contrat_assurance;
 	
+	
 	private String type_vehicule ;
 	
 	private String carburant ;
@@ -155,6 +156,8 @@ public class Vehicule implements Serializable {
 	public void setModel(Vehicule_model model) {
 		this.model = model; 
 	}
+
+	
 	
 	
 	

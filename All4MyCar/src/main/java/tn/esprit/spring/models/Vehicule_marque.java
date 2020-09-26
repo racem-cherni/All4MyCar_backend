@@ -20,7 +20,7 @@ public class Vehicule_marque {
 	private Long id;
 	 
 	private String name;
-
+   
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="marque")
 	private List<Vehicule_model> models;

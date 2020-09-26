@@ -20,7 +20,7 @@ public class Specialisations {
 	private Long id;
 	private String name;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="specialisation")
 	private List<Details_Specialisations > detailspecialisations;
 	

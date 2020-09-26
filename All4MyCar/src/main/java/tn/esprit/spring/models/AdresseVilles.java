@@ -7,20 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(	name = "details_specialisations")
-public class Details_Specialisations {
+@Table(	name = "adressevilles")
+public class AdresseVilles {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
 	
-	@JsonIgnore
+	
 	@ManyToOne
-	Specialisations specialisation;
+	AdressePays adressepays;
 
 	public Long getId() {
 		return id;
@@ -38,17 +37,18 @@ public class Details_Specialisations {
 		this.name = name;
 	}
 
-	public Specialisations getSpecialisation() {
-		return specialisation;
+	public AdressePays getAdressepays() {
+		return adressepays;
 	}
 
-	public void setSpecialisation(Specialisations specialisation) {
-		this.specialisation = specialisation;
+	public void setAdressepays(AdressePays adressepays) {
+		this.adressepays = adressepays;
 	}
 	
 	
 	
 	
 
+	
 
 }
