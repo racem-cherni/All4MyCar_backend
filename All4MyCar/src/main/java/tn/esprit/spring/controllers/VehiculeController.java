@@ -34,6 +34,8 @@ import tn.esprit.spring.models.User;
 import tn.esprit.spring.models.Vehicule;
 import tn.esprit.spring.models.Vehicule_marque;
 import tn.esprit.spring.models.Vehicule_model;
+import tn.esprit.spring.repository.Vehicule_marqueRepository;
+import tn.esprit.spring.repository.Vehicule_modelRepository;
 import tn.esprit.spring.services.ClientService;
 import tn.esprit.spring.services.VehiculeService;
 
@@ -44,7 +46,10 @@ public class VehiculeController {
 
 	@Autowired
 	VehiculeService vehiculeservice ;
-
+@Autowired
+   Vehicule_marqueRepository vehiculemarquerepository;
+@Autowired
+Vehicule_modelRepository vehiculemodelrepository;
 	
 	
 	 /*@GetMapping("/getVehiculeMarqueModel")
@@ -146,7 +151,33 @@ return vehiculeservice.add_vehicule(vec);
              .contentType(MediaType.IMAGE_JPEG)
              .body(new InputStreamResource(imgFile.getInputStream()));
  }
-}
+ @GetMapping("/getlistVehicule")
+ public List<Vehicule_marque> getVehiculeMarque(){
+	 return vehiculemarquerepository.findAll();
+ }
+ @GetMapping("/getlistVehiculeMarque/{name}")
+ public List<Vehicule_model> getVehiculeMarquee(@PathVariable(value = "name") String name){
+	 return vehiculemodelrepository.findByMarqueName(name);
+ }
+
+
+	
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+		
+	}
+		
+		
+
+
+
 		
 		
 
