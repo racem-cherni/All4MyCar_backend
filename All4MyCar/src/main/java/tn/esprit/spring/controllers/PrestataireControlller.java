@@ -123,7 +123,7 @@ public class PrestataireControlller {
 	   @PostMapping("/edit_prestataire1/{firstNamepres}/{lastNamepres}/{adressepres}/{emailpres}/{telpres}/{specialisations}/{cin}")
 		
 		public String edit_presss(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
-				@PathVariable(value = "adresseprof") String adresseprof , @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
+				 @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
 				@PathVariable(value ="cin")  int cin,@RequestParam("file") MultipartFile file
 				 )
 	   {

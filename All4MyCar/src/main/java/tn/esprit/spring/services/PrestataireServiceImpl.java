@@ -56,6 +56,8 @@ public class PrestataireServiceImpl implements PrestataireService {
 		pres1.setTelpres(pres.getTelpres());
 		pres1.setEmailpres(pres.getEmailpres()); 
 		pres1.setPhotopres(pres.getPhotopres());
+		pres1.setSpecialisations(pres.getSpecialisations()); 
+		pres1.setCIN(pres.getCIN());
 		 
 
 	
