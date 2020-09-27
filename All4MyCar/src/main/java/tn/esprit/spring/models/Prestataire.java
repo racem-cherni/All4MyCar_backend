@@ -28,10 +28,10 @@ public class Prestataire {
 	private String firstNamepres;
 	private String lastNamepres;
 	private String adressepres;
-	private String adresseprof;
 	private String emailpres;
 	private int telpres;
 	private String photopres ;
+	private String specialisations ;
 	private int CIN ;
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
@@ -106,16 +106,7 @@ public class Prestataire {
 
 
 
-	public String getAdresseprof() {
-		return adresseprof;
-	}
-
-
-
-
-	public void setAdresseprof(String adresseprof) {
-		this.adresseprof = adresseprof;
-	}
+	
 
 
 
@@ -213,6 +204,34 @@ public class Prestataire {
 
 	public void setRdvp(List<Rdv> rdvp) {
 		this.rdvp = rdvp;
+	}
+
+
+
+
+	public String getSpecialisations() {
+		return specialisations;
+	}
+
+
+
+
+	public void setSpecialisations(String specialisations) {
+		this.specialisations = specialisations;
+	}
+
+
+
+
+	public List<Rdv_dispo> getRdvdispo() {
+		return rdvdispo;
+	}
+
+
+
+
+	public void setRdvdispo(List<Rdv_dispo> rdvdispo) {
+		this.rdvdispo = rdvdispo;
 	}
 
 

@@ -53,7 +53,6 @@ public class PrestataireServiceImpl implements PrestataireService {
 		pres1.setAdressepres(pres.getAdressepres());
 		pres1.setFirstNamepres(pres.getFirstNamepres());
 		pres1.setLastNamepres(pres.getLastNamepres());
-		pres1.setAdresseprof(pres.getAdresseprof());
 		pres1.setTelpres(pres.getTelpres());
 		pres1.setEmailpres(pres.getEmailpres()); 
 		pres1.setPhotopres(pres.getPhotopres());

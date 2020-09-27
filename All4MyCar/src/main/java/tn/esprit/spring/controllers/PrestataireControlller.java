@@ -1,9 +1,10 @@
 package tn.esprit.spring.controllers;
 
-import java.awt.SystemColor;
+import java.awt.SystemColor; 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,12 @@ import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.http.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -113,60 +118,70 @@ public class PrestataireControlller {
 		
 	}*/
    
-   private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/upload";
+	private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/resources";	
 
-	
+	   @PostMapping("/edit_prestataire1/{firstNamepres}/{lastNamepres}/{adressepres}/{emailpres}/{telpres}/{specialisations}/{cin}")
+		
+		public String edit_presss(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
+				@PathVariable(value = "adresseprof") String adresseprof , @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
+				@PathVariable(value ="cin")  int cin,@RequestParam("file") MultipartFile file
+				 )
+	   {
+		   Prestataire pres = new Prestataire();
+		   
+		      
+		      File dir = new File(UPLOADED_FOLDER);
+		      if (!dir.exists())
+					dir.mkdirs();
+		      System.out.println("c bnsssssssssssssssssssaaaaaas ");
+		      File fileToImport = null;
+		      if (dir.isDirectory()) {
+		    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
+		    	  try {
+			        	
+			        	System.out.println("c bn ");
+			        	
+			            fileToImport = new File(dir + File.separator + file.getOriginalFilename());
+			            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
+			            stream.write(file.getBytes());
+			            stream.close();
+			        } catch (Exception e) {
+			            System.out.println("nnnnnnnnn");
+			        }
+		      }
+			   pres.setFirstNamepres(firstNamepres);
+			   pres.setLastNamepres(lastNamepres);
+		       pres.setAdressepres(adressepres);
+		       pres.setEmailpres(emailpres);
 
-   @PostMapping("/edit_prestataire1/{firstNamepres}/{lastNamepres}/{adressepres}/{adresseprof}/{emailpres}/{telpres}")
-	
-	public String edit_presss(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
-			@PathVariable(value = "adresseprof") String adresseprof , @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,
- @RequestParam("file") MultipartFile file
-			 )
-   {
-	   Prestataire pres = new Prestataire();
-	   
-	      
-	      File dir = new File(UPLOADED_FOLDER);
-	      if (!dir.exists())
-				dir.mkdirs();
-	      System.out.println("c bnsssssssssssssssssssaaaaaas ");
-	      File fileToImport = null;
-	      if (dir.isDirectory()) {
-	    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
-	    	  try {
-		        	
-		        	System.out.println("c bn ");
-		        	
-		            fileToImport = new File(dir + File.separator + file.getOriginalFilename());
-		            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
-		            stream.write(file.getBytes());
-		            stream.close();
-		        } catch (Exception e) {
-		            System.out.println("nnnnnnnnn");
-		        }
-	      }
-		   pres.setFirstNamepres(firstNamepres);
-		   pres.setLastNamepres(lastNamepres);
-	       pres.setAdressepres(adressepres);
-	       pres.setAdresseprof(adresseprof);
-	       pres.setEmailpres(emailpres);
-
-	       pres.setTelpres(telpres);
-	        pres.setPhotopres(file.getOriginalFilename());
-	  // clt.setPhotoclt(file.getOriginalFilename());
-	   
-	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			String userName = ((UserDetails) principal).getUsername();
-		//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
-			
-			return prestataireservice.edit_prestataire(prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire(), pres);
+		       pres.setTelpres(telpres);
+		       pres.setSpecialisations(specialisation);
+		       pres.setCIN(cin);
+		        pres.setPhotopres(file.getOriginalFilename());
+		  // clt.setPhotoclt(file.getOriginalFilename());
+		   
+		   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				String userName = ((UserDetails) principal).getUsername();
+			//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+				
+				return prestataireservice.edit_prestataire(prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire(), pres);
+				
+			}
+			return null;
 			
 		}
-		return null;
-		
-	}
+	   
+	   @GetMapping(value = "/api/image/logo/{image}")
+	   public ResponseEntity<InputStreamResource> getImage(@PathVariable(value = "image") String image ) throws IOException {
+
+	       ClassPathResource imgFile = new ClassPathResource(image);
+
+	       return ResponseEntity
+	               .ok()
+	               .contentType(MediaType.IMAGE_JPEG)
+	               .body(new InputStreamResource(imgFile.getInputStream()));
+	   }
    /*
     @PathVariable(value = "heuredam") Time heuredam,@PathVariable(value = "heurefam") Time heurefam
 			,@PathVariable(value = "heuredm") Time heuredm,@PathVariable(value = "heurefm") Time heurefm,
@@ -184,8 +199,7 @@ public class PrestataireControlller {
 	  dispo.setHeuredam(dispos.getHeuredam());
 	  dispo.setHeuredm(dispos.getHeuredm());
 	  dispo.setHeurefam(dispos.getHeurefam());
-	  dispo.setHeurefm(dispo.getHeurefm());
-	
+	  dispo.setHeurefm(dispos.getHeurefm());
 	  String jour = dispos.getJour();
       System.out.println("hey"+jour);
 	  dispo.setJour(dispos.getJour());
