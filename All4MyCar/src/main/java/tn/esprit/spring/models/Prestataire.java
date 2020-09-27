@@ -1,15 +1,22 @@
 package tn.esprit.spring.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
 
 @Entity
 @Table(	name = "prestataire")
@@ -25,16 +32,20 @@ public class Prestataire {
 	private String emailpres;
 	private int telpres;
 	private String photopres ;
-	
 	private int CIN ;
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
-	private String specialisations ;
 
+	@JsonIgnore
+	@OneToMany(mappedBy="prestataire")
+	private List<Rdv_dispo> rdvdispo;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="prestataire")
+	private List<Rdv> rdvp;
 	
-	
-	
+	@OneToOne
+	private User user;
 
 
 
@@ -137,7 +148,16 @@ public class Prestataire {
 
 
 
-	
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 
@@ -184,15 +204,15 @@ public class Prestataire {
 
 
 
-	public String getSpecialisations() {
-		return specialisations;
+	public List<Rdv> getRdvp() {
+		return rdvp;
 	}
 
 
 
 
-	public void setSpecialisations(String specialisations) {
-		this.specialisations = specialisations;
+	public void setRdvp(List<Rdv> rdvp) {
+		this.rdvp = rdvp;
 	}
 
 
