@@ -11,6 +11,7 @@ import tn.esprit.spring.models.Vehicule_model;
 public interface GarageService {
 	String add_Garage(Garage garage);
 	
+	
 	Garage findGarage();
 	 AdresseCites getCitebyid(long idadressecite);
 }

@@ -26,7 +26,8 @@ public class GarageServiceImpl implements GarageService{
 	PrestataireService prestataireservice;
 	@Override
 	public String add_Garage(Garage garage) {
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal instanceof UserDetails) {
 				String userName = ((UserDetails) principal).getUsername();
 				Prestataire pres  = prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire();

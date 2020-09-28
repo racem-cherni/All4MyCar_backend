@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface GarageRepository  extends JpaRepository<Garage,Long>{
 
+	
+	
 	Garage findByPrestataireId(@Param("idpres") long idpres);
 
 }

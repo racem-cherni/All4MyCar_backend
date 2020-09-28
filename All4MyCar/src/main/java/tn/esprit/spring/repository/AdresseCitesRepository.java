@@ -18,6 +18,7 @@ public interface AdresseCitesRepository extends JpaRepository<AdresseCites, Long
 	
 	List<AdresseCites> findByAdressevillesId(@Param("id") Long id);
 	
+	
 
 	AdresseCites findById( @Param("idadressecite") long idadressecite);
 }
