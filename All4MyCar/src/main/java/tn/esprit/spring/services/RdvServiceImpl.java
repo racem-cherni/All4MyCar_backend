@@ -1,5 +1,9 @@
 package tn.esprit.spring.services;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +42,12 @@ public class RdvServiceImpl implements RdvService{
 	}
 
 	@Override
-	public String modifier_dispojour(Rdv_dispo dispo, int id) {
+	public String modifier_dispojour(Rdv_dispo dispo, int id) throws ParseException {
 		Rdv_dispo dp = prestatairerepository.findDispById(id);
-        dp.setHeuredam(dispo.getHeuredam());
-       dp.setHeuredm(dispo.getHeuredm());
-        dp.setHeurefam(dispo.getHeurefam());
-        dp.setHeurefm(dispo.getHeurefm());
+        dp.setHeuredam(addoneHour(dispo.getHeuredam()));
+       dp.setHeuredm(addoneHour(dispo.getHeuredm()));
+        dp.setHeurefam(addoneHour(dispo.getHeurefam()));
+        dp.setHeurefm(addoneHour(dispo.getHeurefm()));
 dp.setJour_actif(dispo.isJour_actif());
 dp.setPeriodedeux_actif(dispo.isPeriodedeux_actif());
 	      System.out.println("heyservice"+dp.isJour_actif());
@@ -52,5 +56,19 @@ dp.setPeriodedeux_actif(dispo.isPeriodedeux_actif());
 return "profil modifie";
 	}
 
+	public Date addoneHour (Date heure) throws ParseException{
+		if (heure!=null){
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(heure); 
+		c.add(Calendar.HOUR_OF_DAY, 1);
+		Date d = c.getTime();
+		System.out.println("tryaddone"+""+c.getTime());
+		System.out.println(d);
+		
+		//Time timeValue = new Time(d.getTime());
+
+		return d;
+		}else return null;
+	}
 
 }
