@@ -42,7 +42,8 @@ public class Rdv_dispo implements Serializable{
 		private Date heurefam;
 		
 		private boolean jour_actif;
-		
+		private boolean periodedeux_actif;
+
 		public int getId() {
 			return id;
 		}
@@ -100,6 +101,12 @@ public class Rdv_dispo implements Serializable{
 		}
 		public void setHeurefam(Date heurefam) {
 			this.heurefam = heurefam;
+		}
+		public boolean isPeriodedeux_actif() {
+			return periodedeux_actif;
+		}
+		public void setPeriodedeux_actif(boolean periodedeux_actif) {
+			this.periodedeux_actif = periodedeux_actif;
 		}
 	
 		
