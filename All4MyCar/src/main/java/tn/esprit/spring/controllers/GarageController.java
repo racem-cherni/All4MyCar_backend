@@ -3,6 +3,7 @@ package tn.esprit.spring.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,20 +62,41 @@ public Garage getGarage(){
 }
 private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/main/resources";	
 
-@PostMapping("/addgaragee/{nbrMecaniciens}")
+@PostMapping("/addgaragee/{nbrMecaniciens}/{date_ouverture}/{anneesexperiences}/{adresse}/{idadressecite}/{description}")
 	
-	public String add_garage(@PathVariable(value = "nbrMecaniciens") int nbrMecaniciens  )
+	public String add_garage(@PathVariable(value = "nbrMecaniciens") int nbrMecaniciens,@PathVariable(value = "date_ouverture") Date dateouverture,
+			@PathVariable(value = "anneesexperiences") int anneesexperiences,@PathVariable(value = "adresse") String ad,@PathVariable(value = "idadressecite") long idadressecite,@PathVariable(value = "description") String description,@RequestParam("file") MultipartFile file)
 {
 	   Garage garage = new Garage();
+	   File dir = new File(UPLOADED_FOLDER);
+	      if (!dir.exists())
+				dir.mkdirs();
+	      System.out.println("c bnsssssssssssssssssssaaaaaas ");
+	      File fileToImport = null;
+	      if (dir.isDirectory()) {
+	    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
+	    	  try {
+		        	
+		        	System.out.println("c bn ");
+		        	
+		            fileToImport = new File(dir + File.separator + file.getOriginalFilename());
+		            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
+		            stream.write(file.getBytes());
+		            stream.close();
+		        } catch (Exception e) {
+		            System.out.println("nnnnnnnnn");
+		        }
+	      }
 	  
-	//   AdresseCites ad = garageservice.getCitebyid(idadressecite);
+	    AdresseCites address = garageservice.getCitebyid(idadressecite);
 	  
-	     // garage.setAddresse(addresse);
-	    //  garage.setAdressecite(ad);
-	     //  garage.setAnnée_Experience(annéeExperience);
-	      // garage.setDate_ouverture(dateouverture);
-
-	       garage.setNbr_Mecaniciens(nbrMecaniciens);
+	      garage.setAddresse(ad);
+	     garage.setAdressecite(address);
+	      garage.setAnnée_Experience(anneesexperiences);
+	      garage.setDate_ouverture(dateouverture);
+         garage.setPhoto_garage(file.getOriginalFilename());
+         garage.setDescription(description);      
+         garage.setNbr_Mecaniciens(nbrMecaniciens);
 	     
 	       //garage.setPhoto_garage(file.getOriginalFilename());
 	  
@@ -78,6 +104,16 @@ private static String UPLOADED_FOLDER = System.getProperty("user.dir")+"/src/mai
 	   return garageservice.add_Garage(garage);
 		
 	}
+@GetMapping(value = "/afficheimagegarage/image/logo/{image}")
+public ResponseEntity<InputStreamResource> getImage(@PathVariable(value = "image") String image ) throws IOException {
+
+    ClassPathResource imgFile = new ClassPathResource(image);
+
+    return ResponseEntity
+            .ok()
+            .contentType(MediaType.IMAGE_JPEG)
+            .body(new InputStreamResource(imgFile.getInputStream()));
+}
  
 
 }

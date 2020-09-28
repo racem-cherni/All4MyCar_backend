@@ -48,10 +48,10 @@ public class GarageServiceImpl implements GarageService{
 		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal instanceof UserDetails) {
 				String userName = ((UserDetails) principal).getUsername();
-				Prestataire pres  = clientservice.Afficher_client_by_name(userName).getPrestataire();
+				Prestataire pres  = prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire();
 				
-				garagerepository.findByPrestataireId(pres.getId());
-				
+				return garagerepository.findByPrestataireId(pres.getId());
+			    
 
 
 			}

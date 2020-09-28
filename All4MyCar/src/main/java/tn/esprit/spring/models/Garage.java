@@ -30,8 +30,7 @@ public class Garage  implements Serializable{
 	@Temporal(TemporalType.DATE)
     private Date date_ouverture;
 
-	@Temporal(TemporalType.DATE)
-    private Date année_Experience;
+    private int année_Experience;
 	private String photo_garage;
 	
     @OneToOne
@@ -39,6 +38,7 @@ public class Garage  implements Serializable{
     private String addresse ;
     @OneToOne
     private Prestataire prestataire;
+    private String description;
 	public Long getId() {
 		return id;
 	}
@@ -57,10 +57,11 @@ public class Garage  implements Serializable{
 	public void setDate_ouverture(Date date_ouverture) {
 		this.date_ouverture = date_ouverture;
 	}
-	public Date getAnnée_Experience() {
+	
+	public int getAnnée_Experience() {
 		return année_Experience;
 	}
-	public void setAnnée_Experience(Date année_Experience) {
+	public void setAnnée_Experience(int année_Experience) {
 		this.année_Experience = année_Experience;
 	}
 	public String getPhoto_garage() {
@@ -87,5 +88,12 @@ public class Garage  implements Serializable{
 	public void setPrestataire(Prestataire prestataire) {
 		this.prestataire = prestataire;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 
 }
