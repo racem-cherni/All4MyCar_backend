@@ -31,12 +31,14 @@ import tn.esprit.spring.models.Vehicule_model;
 import tn.esprit.spring.repository.GarageRepository;
 import tn.esprit.spring.services.GarageService;
 
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value="/api")
 public class GarageController {
 	@Autowired
 	GarageService garageservice;
+	
 	@Autowired
 	GarageRepository garagerepository;
 @PostMapping("/addgarage")
