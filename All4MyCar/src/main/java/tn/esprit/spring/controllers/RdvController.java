@@ -1,5 +1,6 @@
 package tn.esprit.spring.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class RdvController {
 	
 	   @PostMapping("/modifier_dispojour")
 		
-		public String modifier_dispojour(@RequestBody Rdv_dispo dispos) {
+		public String modifier_dispojour(@RequestBody Rdv_dispo dispos) throws ParseException {
 		  Rdv_dispo dispo = new Rdv_dispo();
 				
 		  dispo.setHeuredam(dispos.getHeuredam());
