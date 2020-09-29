@@ -1,11 +1,16 @@
 package tn.esprit.spring.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.models.User;
+import tn.esprit.spring.models.Vehicule_model;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -15,4 +20,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Boolean existsByUsername(String username);
 
 	Boolean existsByEmail(String email);
+	
+	
+	@Query("SELECT u from User u where u.etat=0")
+	List<User> findByEtat();
+	
+	
+	
+	
 }

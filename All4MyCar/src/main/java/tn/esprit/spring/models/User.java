@@ -52,6 +52,9 @@ public class User implements Serializable {
 	
 	private String password;
 	
+	private boolean etat ;
+
+	
 	@OneToOne
 	private Client client;
 	
@@ -130,10 +133,23 @@ public class User implements Serializable {
 		this.prestataire = prestataire;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "User [roles=" + roles + "]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", etat="
+				+ etat + ", client=" + client + ", prestataire=" + prestataire + ", roles=" + roles + "]";
 	}
+
+	public boolean isEtat() {
+		return etat;
+	}
+
+	public void setEtat(boolean etat) {
+		this.etat = etat;
+	}
+	
+	
 
 	
 	

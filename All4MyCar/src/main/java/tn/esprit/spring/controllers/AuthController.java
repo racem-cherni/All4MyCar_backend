@@ -138,8 +138,9 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
+		user.setEtat(false);
 		userRepository.save(user);
-		Date d = new Date() ;
+	/*	Date d = new Date() ;
 		List<Role> list = new ArrayList<>(); 
 	   for (Role t : roles) 
 	    list.add(t); 
@@ -164,9 +165,9 @@ public class AuthController {
 			user.setPrestataire(pres);
 			userRepository.save(user);
 			
-		}
+		}*/
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		return ResponseEntity.ok(new MessageResponse("Merci ! Nous vous rappelons très rapidement."));
 		
 	}
 }
