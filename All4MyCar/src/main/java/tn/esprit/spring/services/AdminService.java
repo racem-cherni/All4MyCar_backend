@@ -9,4 +9,6 @@ public interface AdminService {
 List<User> findUser();
 List<User> findClientUser();
 List<User>  findPrestataireUser();
+User Afficher_admin_by_name (String username);
+
 }

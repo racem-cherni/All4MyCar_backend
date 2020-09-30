@@ -61,6 +61,9 @@ public class User implements Serializable {
 
 	@OneToOne
 	private Prestataire prestataire;
+	
+	@OneToOne
+	private Admin admin;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -147,6 +150,14 @@ public class User implements Serializable {
 
 	public void setEtat(boolean etat) {
 		this.etat = etat;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 	
 	

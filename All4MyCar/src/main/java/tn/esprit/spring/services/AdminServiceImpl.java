@@ -64,5 +64,10 @@ UserRepository userrepository;
 		return users_clients ;
 		
 	}
+	@Override
+	public User Afficher_admin_by_name(String username) {
+		return userrepository.findByUsername(username).get();
+
+	}
 
 }
