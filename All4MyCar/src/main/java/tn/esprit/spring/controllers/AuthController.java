@@ -139,6 +139,8 @@ public class AuthController {
 
 		user.setRoles(roles);
 		user.setEtat(false);
+		Date d = new Date();
+		user.setDate_registration(d);
 		userRepository.save(user);
 	/*	Date d = new Date() ;
 		List<Role> list = new ArrayList<>(); 

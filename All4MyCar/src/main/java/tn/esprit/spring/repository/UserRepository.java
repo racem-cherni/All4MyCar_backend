@@ -11,12 +11,15 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.models.Vehicule_model;
 import java.util.Set;
+import java.lang.Long;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Optional<User> findByUsername(String username);
-
+	
+	@Query("SELECT u from User u where u.id=:iduser")
+    User finduserbyid(@Param("iduser") Long id);
 	Boolean existsByUsername(String username);
 
 	Boolean existsByEmail(String email);

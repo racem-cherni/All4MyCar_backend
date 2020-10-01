@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.models.Admin;
 import tn.esprit.spring.models.AdressePays;
+import tn.esprit.spring.models.Client;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.services.AdminService;
 import tn.esprit.spring.services.AdresseService;
@@ -56,4 +61,34 @@ return adminservice.findPrestataireUser();
 		return null;
 		
 	}
+
+   @PostMapping("/adduserclient/{idclient}")
+   public String adduserclient(@PathVariable(value = "idclient") long idclient) {
+	
+	return adminservice.Accepter_Client(idclient); 
+}
+   
+   @PostMapping("/adduserprestataire/{idpres}")
+   public String adduserprestataire(@PathVariable(value = "idpres") long idpres) {
+	
+	return adminservice.Accepter_Client(idpres); 
+}
+   
+   @DeleteMapping("/deleteuserclient/{idclient}")
+	
+	public String removeuserclient(@PathVariable(value = "idclient") long idclient) {
+	 
+	  
+			return adminservice.refuser_client(idclient);
+			
+		}
+   
+   @DeleteMapping("/deleteuserprestataire/{idpres}")
+	
+	public String removeuserprestataire(@PathVariable(value = "idpres") long idpres) {
+	 
+	  
+			return adminservice.refuser_pres(idpres);
+			
+		}
 }

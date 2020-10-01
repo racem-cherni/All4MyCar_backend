@@ -1,6 +1,7 @@
 package tn.esprit.spring.models;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.FetchMode;
@@ -53,6 +56,9 @@ public class User implements Serializable {
 	private String password;
 	
 	private boolean etat ;
+	
+	@Temporal(TemporalType.DATE)
+	private Date date_registration;
 
 	
 	@OneToOne
@@ -158,6 +164,14 @@ public class User implements Serializable {
 
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+
+	public Date getDate_registration() {
+		return date_registration;
+	}
+
+	public void setDate_registration(Date date_registration) {
+		this.date_registration = date_registration;
 	}
 	
 	
