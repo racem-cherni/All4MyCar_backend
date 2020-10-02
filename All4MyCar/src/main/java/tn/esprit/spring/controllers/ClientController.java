@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import tn.esprit.spring.models.Client;
+import tn.esprit.spring.models.Prestataire;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.payload.request.SignupRequest;
 import tn.esprit.spring.services.ClientService;
@@ -152,7 +153,35 @@ public class ClientController {
                .body(new InputStreamResource(imgFile.getInputStream()));
    }
 
-   
+   @PostMapping("/edit_client12/{firstname}/{lastname}/{email}/{adresse}/{telnum}/{cin}/{datepermis}")
+	
+  	public String edit_clientttt12(@PathVariable(value = "firstname") String firstname ,@PathVariable(value = "lastname") String lastname ,@PathVariable(value = "email") String email ,
+  			@PathVariable(value = "adresse") String adresse , @PathVariable(value = "telnum") int telnum , @PathVariable(value = "cin")  int cin ,
+  			@PathVariable(value = "datepermis") Date datepermis 
+  			 )
+     {
+  	   Client clt = new Client();
+  	   
+  	      
+  	    
+  	   clt.setAdresseclt(adresse);clt.setEmailclt(email);
+  	   clt.setCIN(cin);clt.setTelclt(telnum);clt.setDate_permis(datepermis);clt.setFirstNameclt(firstname);clt.setLastNameclt(lastname);
+  	   
+  	  
+  	
+  	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  		if (principal instanceof UserDetails) {
+  			String userName = ((UserDetails) principal).getUsername();
+  		//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+  			Client c = clientservice.Afficher_client_by_name(userName).getClient();
+  			 clt.setPhotoclt(c.getPhotoclt());
+  			return clientservice.edit_client(clientservice.Afficher_client_by_name(userName).getClient(),clt);
+  			
+  		}
+  		return null;
+  		
+  	}
+     
   
 
 }
