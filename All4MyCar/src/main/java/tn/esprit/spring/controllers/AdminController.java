@@ -1,6 +1,9 @@
 package tn.esprit.spring.controllers;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,15 +66,15 @@ return adminservice.findPrestataireUser();
 	}
 
    @PostMapping("/adduserclient/{idclient}")
-   public String adduserclient(@PathVariable(value = "idclient") long idclient) {
+   public String adduserclient(@PathVariable(value = "idclient") long idclient)throws MessagingException, IOException {
 	
-	return adminservice.Accepter_Client(idclient); 
+	return adminservice.Accepter_Client(idclient) ; 
 }
    
    @PostMapping("/adduserprestataire/{idpres}")
    public String adduserprestataire(@PathVariable(value = "idpres") long idpres) {
 	
-	return adminservice.Accepter_Client(idpres); 
+	return adminservice.Accepter_Pres(idpres); 
 }
    
    @DeleteMapping("/deleteuserclient/{idclient}")

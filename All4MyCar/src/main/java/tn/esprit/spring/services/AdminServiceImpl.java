@@ -1,12 +1,20 @@
 package tn.esprit.spring.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.models.Client;
@@ -21,6 +29,9 @@ import tn.esprit.spring.repository.UserRepository;
 public class AdminServiceImpl  implements AdminService{
 @Autowired
 UserRepository userrepository;
+
+@Autowired
+private JavaMailSender javaMailSender;
 
 @Autowired
 ClientRepository clientRepository;
@@ -83,7 +94,7 @@ PrestataireRepository prestataireRepository;
 
 	}
 	@Override
-	public String Accepter_Client(long idclient) {
+	public String Accepter_Client(long idclient) throws MessagingException, IOException {
 		User clt = userrepository.finduserbyid(idclient);
 		
 		Date d = new Date() ;
@@ -93,10 +104,31 @@ PrestataireRepository prestataireRepository;
 			client.setEmailclt(clt.getEmail());
 			client.setDate_inscrip(d);
 			clientRepository.save(client);
-			clt.setEtat(true);
+			clt.setEtat(true);//////////////////
 			clt.setClient(client);
 			userrepository.save(clt);
+			// SimpleMailMessage msg = new SimpleMailMessage();
+			 MimeMessage msg = javaMailSender.createMimeMessage();
+			 MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+			 helper.setTo(clt.getEmail());
+		        helper.setSubject("Merci pour votre inscription ! Bienvenue sur All4MyCar ▶");
+			// true = text/html
+		        helper.setText("<html><body> <h1 style='font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif '>ALL <span"
+		      +  " style='color:red;'> 4 </span> MYCAR</h1>\n"+
+		        		 "<h3> Bonjour Mr(s) "+clt.getUsername()+",</h3>\n" + 
+		         "Bienvenue ! Vous êtes inscrit sur All4MyCar,\n"+
+		        " Connectez-vous sur notre site et faites vous plaisir en  les meilleures services \n"
+		        + " ! Notre site s'est associé à nombreuses garages  \n pour vous garantir le meilleur choix et prix.\n"
+		        + " N'hésitez pas à nous contacter pour toute question ou suggestion!\n"
+		        +"Par email: <a href='all4mycar.info@gmail.com'>all4mycar.info@gmail.com</a> ou par téléphone en composant le +216 31320900 , du lundi au vendredi de 8h30 à 20h .\n"
+		        +"<br>"
+		        +"<p>Cordialement,</p>\n"+
+		        "L'Equipe de ALL4MyCar\n"
+		        + "</body></html>", true);
+		        //helper.addAttachment("Capture d’écran 2020-10-02 104720.png", new ClassPathResource("/src/main/resources/Capture d’écran 2020-10-02 104720.png"));
+		        javaMailSender.send(msg);
 			return "client ajouté";
+			
 		
 		
 	}
