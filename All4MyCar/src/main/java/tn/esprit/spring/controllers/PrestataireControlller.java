@@ -96,14 +96,7 @@ public class PrestataireControlller {
 		
 	}
    
-   @GetMapping("/FinddispoByPres")
-	
-	public List<Rdv_dispo> getdisponibility() {
-	 
-			return prestataireservice.getdisponibility();
-		
-	}
-   
+  
   /* @PutMapping("/edit_client")
 	
 	public String edit_client(@RequestBody Client clt) {
@@ -187,40 +180,42 @@ public class PrestataireControlller {
 			,@PathVariable(value = "heuredm") Time heuredm,@PathVariable(value = "heurefm") Time heurefm,
 			@PathVariable(value = "jour") String jour,@PathVariable(value = "jour_actif") Number jour_actif
     */
-   @PostMapping("/modifier_dispojour")
-	
-	public String modifier_dispojour(@RequestBody Rdv_dispo dispos) {
-	  Rdv_dispo dispo = new Rdv_dispo();
+	   
+	   @PostMapping("/edit_prestataire12/{firstNamepres}/{lastNamepres}/{adressepres}/{emailpres}/{telpres}/{specialisations}/{cin}")
+		
+		public String edit_pressswithoutphoto(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
+				 @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
+				@PathVariable(value ="cin")  int cin
+				 )
+	   {
+		   Prestataire pres = new Prestataire();
+		   
+		      
+		  
+		      
+			   pres.setFirstNamepres(firstNamepres);
+			   pres.setLastNamepres(lastNamepres);
+		       pres.setAdressepres(adressepres);
+		       pres.setEmailpres(emailpres);
+
+		       pres.setTelpres(telpres);
+		       pres.setSpecialisations(specialisation);
+		       pres.setCIN(cin);
+		  // clt.setPhotoclt(file.getOriginalFilename());
+		   
+		   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				String userName = ((UserDetails) principal).getUsername();
+			//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+				Prestataire p = prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire();
+				pres.setPhotopres(p.getPhotopres());
+				return prestataireservice.edit_prestataire(prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire(), pres);
+				
+			}
+			return null;
 			
+		}
 
-		  //  System.out.println(heureReturn);
-
-			
-	  dispo.setHeuredam(dispos.getHeuredam());
-	  dispo.setHeuredm(dispos.getHeuredm());
-	  dispo.setHeurefam(dispos.getHeurefam());
-	  dispo.setHeurefm(dispos.getHeurefm());
-	  String jour = dispos.getJour();
-      System.out.println("hey"+jour);
-	  dispo.setJour(dispos.getJour());
-      System.out.println("heyheuredam"+dispo.getHeuredam());
-
-	  
-		  dispo.setJour_actif(dispos.isJour_actif());
-	      System.out.println("hey"+dispo.isJour_actif());
-
-	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			String userName = ((UserDetails) principal).getUsername();
-			Prestataire clt  = userrepository.findByUsername(userName).get().getPrestataire();		
-			int idd = rdv_disporepository.getdispoByDayAndpres(dispo.getJour(),clt.getId());
-		      System.out.println("hey"+idd);
-
-			return prestataireservice.modifier_dispojour(dispo,idd);
-
-	}
-		return null;
-
-}
+  
  
 }
