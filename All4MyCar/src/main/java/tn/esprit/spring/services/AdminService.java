@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import tn.esprit.spring.models.Client;
+import tn.esprit.spring.models.Prestataire;
 import tn.esprit.spring.models.User;
 
 public interface AdminService {
@@ -18,5 +20,10 @@ String Accepter_Client(long idclient)throws MessagingException, IOException;
    
    String Accepter_Pres(long idpres);
    String refuser_pres(long idpres);
+   List<Client> getAllClient();
+   List<Prestataire> getAllPrestataire();
+   String deleteClient(long idclient);
+   String deletPrestataire(long idpres);
+   
 
 }

@@ -21,5 +21,9 @@ public interface PrestataireRepository extends JpaRepository<Prestataire, Long> 
 	@Query("Select "
 			+ "d from Rdv_dispo d where d.id=:idp")
 	public Rdv_dispo findDispById(@Param("idp") int id);
+	
+	 List<Prestataire> findAll() ;
+		
+	
 
 }

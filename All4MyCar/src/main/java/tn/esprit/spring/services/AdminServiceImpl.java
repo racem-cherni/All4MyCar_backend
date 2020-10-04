@@ -160,5 +160,28 @@ PrestataireRepository prestataireRepository;
 		userrepository.deleteById(idpres);
 		return "user supprime" ;
 	}
+	@Override
+	public List<Client> getAllClient() {
+		return   clientRepository.findAll();
+	}
+	@Override
+	public List<Prestataire> getAllPrestataire() {
+		return prestataireRepository.findAll();
+	}
+	@Override
+	public String deleteClient(long idclient) {
+		User user=userrepository.findByClientId(idclient);
+		userrepository.delete(user);
+		clientRepository.deleteById(idclient);
+		return "client supprimé";
+	}
+	@Override
+	public String deletPrestataire(long idpres) {
+		User user=userrepository.findByPrestataireId(idpres);
+		
+		userrepository.delete(user);
+	prestataireRepository.deleteById(idpres);
+	return "prestataire supprimé";
+	}
 
 }

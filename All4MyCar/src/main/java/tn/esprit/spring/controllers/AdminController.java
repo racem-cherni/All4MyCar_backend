@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.models.Admin;
 import tn.esprit.spring.models.AdressePays;
 import tn.esprit.spring.models.Client;
+import tn.esprit.spring.models.Prestataire;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.services.AdminService;
 import tn.esprit.spring.services.AdresseService;
@@ -92,6 +93,34 @@ return adminservice.findPrestataireUser();
 	 
 	  
 			return adminservice.refuser_pres(idpres);
+			
+		}
+   @GetMapping("/getAllClient")
+
+   public List<Client> getAllClients() {
+   return adminservice.getAllClient();
+
+   }
+   @GetMapping("/getAllPrestataire")
+
+   public List<Prestataire> getAllPrestataires() {
+   return adminservice.getAllPrestataire();
+
+   }
+   @DeleteMapping("/deleteclient/{idclient}")
+	
+	public String deleteclient(@PathVariable(value = "idclient") long idclient) {
+	 
+	  
+			return adminservice.deleteClient(idclient);
+			
+		}
+   @DeleteMapping("/deleteprestataire/{idpres}")
+	
+	public String deletepres(@PathVariable(value = "idpres") long idpres) {
+	 
+	  
+			return adminservice.deletPrestataire(idpres);
 			
 		}
 }

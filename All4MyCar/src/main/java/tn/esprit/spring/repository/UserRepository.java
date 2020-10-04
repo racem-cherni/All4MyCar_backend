@@ -12,6 +12,8 @@ import tn.esprit.spring.models.User;
 import tn.esprit.spring.models.Vehicule_model;
 import java.util.Set;
 import java.lang.Long;
+import tn.esprit.spring.models.Client;
+import tn.esprit.spring.models.Prestataire;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -28,7 +30,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u from User u where u.etat=0")
 	List<User> findByEtat();
 	
+	User  findByClientId(@Param("idclient") Long id);
 	
-	
+	User findByPrestataireId(@Param("idpres") Long id);
 	
 }
