@@ -123,4 +123,20 @@ return adminservice.findPrestataireUser();
 			return adminservice.deletPrestataire(idpres);
 			
 		}
+   
+   
+   @GetMapping("/getClientbyid/{idclt}")
+
+   public Client getClient(@PathVariable(value = "idclt") long idclt) {
+   return adminservice.detailclient(idclt);
+
+   }
+   
+   @GetMapping("/getPrestatairebyid/{idpres}")
+
+   public Prestataire getPrestataire(@PathVariable(value = "idpres") long idpres) {
+   return adminservice.detailprestataire(idpres);
+
+   }
+   
 }

@@ -183,5 +183,14 @@ PrestataireRepository prestataireRepository;
 	prestataireRepository.deleteById(idpres);
 	return "prestataire supprimé";
 	}
+	@Override
+	public Client detailclient(long idclt) {
+		
+		return clientRepository.findById(idclt).get();
+	}
+	@Override
+	public Prestataire detailprestataire(long idpres) {
+		return prestataireRepository.findById(idpres).get();
+	}
 
 }

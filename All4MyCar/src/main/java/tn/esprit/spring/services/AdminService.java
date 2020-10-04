@@ -24,6 +24,8 @@ String Accepter_Client(long idclient)throws MessagingException, IOException;
    List<Prestataire> getAllPrestataire();
    String deleteClient(long idclient);
    String deletPrestataire(long idpres);
+   Client detailclient(long idclt);
+   Prestataire detailprestataire(long idpres);
    
 
 }
