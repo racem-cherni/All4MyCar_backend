@@ -9,8 +9,16 @@ import tn.esprit.spring.models.Specialisations;
 
 @Repository
 public interface SpecialisationsRepository extends JpaRepository<Specialisations, Long> {
+	
 	@Override
 	List<Specialisations> findAll();
+	
+	
+	
+	
+    
+	
+	
 	
 
 }

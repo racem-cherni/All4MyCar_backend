@@ -1,6 +1,7 @@
 package tn.esprit.spring.controllers;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -136,6 +137,27 @@ return adminservice.findPrestataireUser();
 
    public Prestataire getPrestataire(@PathVariable(value = "idpres") long idpres) {
    return adminservice.detailprestataire(idpres);
+
+   }
+   
+   @GetMapping("/getallClientbydateinscription/{date}")
+
+   public List<Client> getallClientbydateinscription(@PathVariable(value = "date") Date date_inscription) {
+   return adminservice.getAllClientbydateinscription(date_inscription);
+
+   }
+   
+   @GetMapping("/getallprestatairesbydateinscription/{date}")
+
+   public List<Prestataire> getallprestatairebydateinscription(@PathVariable(value = "date") Date date_inscription) {
+   return adminservice.getAllPrestatairebydateinscription(date_inscription);
+
+   }
+   
+   @GetMapping("/getallprestatairesbyspecialisations/{specialisation}")
+
+   public List<Prestataire> getallprestatairebyspecialisations(@PathVariable(value = "specialisation") String specialisation) {
+   return adminservice.getAllPrestatairebyspecialisations(specialisation);
 
    }
    

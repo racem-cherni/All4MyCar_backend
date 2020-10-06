@@ -108,12 +108,12 @@ PrestataireRepository prestataireRepository;
 			clt.setClient(client);
 			userrepository.save(clt);
 			// SimpleMailMessage msg = new SimpleMailMessage();
-			 MimeMessage msg = javaMailSender.createMimeMessage();
-			 MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-			 helper.setTo(clt.getEmail());
-		        helper.setSubject("Merci pour votre inscription ! Bienvenue sur All4MyCar ▶");
+			// MimeMessage msg = javaMailSender.createMimeMessage();
+		//	 MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+		//	 helper.setTo(clt.getEmail());
+		  //      helper.setSubject("Merci pour votre inscription ! Bienvenue sur All4MyCar ▶");
 			// true = text/html
-		        helper.setText("<html><body> <h1 style='font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif '>ALL <span"
+		  /*      helper.setText("<html><body> <h1 style='font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif '>ALL <span"
 		      +  " style='color:red;'> 4 </span> MYCAR</h1>\n"+
 		        		 "<h3> Bonjour Mr(s) "+clt.getUsername()+",</h3>\n" + 
 		         "Bienvenue ! Vous êtes inscrit sur All4MyCar,\n"+
@@ -124,9 +124,9 @@ PrestataireRepository prestataireRepository;
 		        +"<br>"
 		        +"<p>Cordialement,</p>\n"+
 		        "L'Equipe de ALL4MyCar\n"
-		        + "</body></html>", true);
+		        + "</body></html>", true);*/
 		        //helper.addAttachment("Capture d’écran 2020-10-02 104720.png", new ClassPathResource("/src/main/resources/Capture d’écran 2020-10-02 104720.png"));
-		        javaMailSender.send(msg);
+		      //  javaMailSender.send(msg);
 			return "client ajouté";
 			
 		
@@ -191,6 +191,31 @@ PrestataireRepository prestataireRepository;
 	@Override
 	public Prestataire detailprestataire(long idpres) {
 		return prestataireRepository.findById(idpres).get();
+	}
+	@Override
+	public List<Client> getAllClientbydateinscription(Date date) {
+		return clientRepository.findByDate_inscription(date);
+	}
+	@Override
+	public List<Prestataire> getAllPrestatairebydateinscription(Date date) {
+		return prestataireRepository.findByDate_inscription(date);
+	}
+	
+	@Override
+	public List<Prestataire> getAllPrestatairebyspecialisations(String specialisations) {
+		
+		List<Prestataire> pres = prestataireRepository.findAll();
+		//System.err.println(pres);
+		List<Prestataire> recherchepres = new  ArrayList<>();
+		for(int i=0;i<pres.size();i++){
+			System.err.println(pres.get(i).getSpecialisations());
+			if (pres.get(i).getSpecialisations().contains(specialisations)){
+				recherchepres.add(pres.get(i));
+				
+			}
+		}
+		//System.err.println(recherchepres);
+		return recherchepres ;
 	}
 
 }

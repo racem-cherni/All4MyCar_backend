@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -21,7 +22,14 @@ String Accepter_Client(long idclient)throws MessagingException, IOException;
    String Accepter_Pres(long idpres);
    String refuser_pres(long idpres);
    List<Client> getAllClient();
+   List<Client> getAllClientbydateinscription(Date date);
+
    List<Prestataire> getAllPrestataire();
+   List<Prestataire> getAllPrestatairebydateinscription(Date date);
+   
+   List<Prestataire> getAllPrestatairebyspecialisations(String specialisations);
+
+
    String deleteClient(long idclient);
    String deletPrestataire(long idpres);
    Client detailclient(long idclt);
