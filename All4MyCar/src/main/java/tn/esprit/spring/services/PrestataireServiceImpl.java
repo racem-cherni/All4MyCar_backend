@@ -89,4 +89,18 @@ dp.setJour_actif(dispo.isJour_actif());
 return "profil modifie";
 	}
 
+
+
+	@Override
+	public String ajouterprofil_prestataire(long id, Prestataire press) {
+		User user = userrepository.finduserbyid(id);
+		Date d = new Date() ;
+		prestatairerepository.save(press);
+		user.setPrestataire(press);
+		userrepository.save(user);
+
+		return "client ajouté";
+	}
+
+	
 }

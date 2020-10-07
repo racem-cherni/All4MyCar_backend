@@ -10,6 +10,7 @@ public interface ClientService {
 	//String edit_client(Client clt);
 	String RemoveClient ( Long idclient);
 	String edit_client(Client Cach, Client clt);
+	String ajouterclient_sansverif(Long id, Client clt);
 	
 	
 	

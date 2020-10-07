@@ -32,7 +32,7 @@ public class Garage  implements Serializable{
 
     private int année_Experience;
 	private String photo_garage;
-	
+	private int etat ;
     @OneToOne
    private AdresseCites adressecite;
     private String addresse ;
@@ -93,6 +93,12 @@ public class Garage  implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
 	}
 	
 

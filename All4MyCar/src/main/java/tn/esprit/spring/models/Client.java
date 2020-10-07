@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
+
 @Entity
 @Table(	name = "client")
 @JsonIgnoreProperties({ "user" })
@@ -40,6 +41,7 @@ public class Client implements Serializable {
 	private String photoclt ;
 	
 	private int CIN ;
+	private String cin_cartegrise_photo;
 	
 	@Temporal(TemporalType.DATE)
     private Date date_permis;
@@ -47,7 +49,7 @@ public class Client implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
 	
-	
+	private int etat;
 	
 	private int telclt;
 	private String adresseclt;
@@ -127,6 +129,20 @@ public class Client implements Serializable {
 	public void setDate_inscrip(Date date_inscrip) {
 		this.date_inscrip = date_inscrip;
 	}
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
+	public String getCin_cartegrise_photo() {
+		return cin_cartegrise_photo;
+	}
+	public void setCin_cartegrise_photo(String cin_cartegrise_photo) {
+		this.cin_cartegrise_photo = cin_cartegrise_photo;
+	}
+	
+	
 	
 	
 

@@ -15,5 +15,6 @@ public interface PrestataireService {
 	String edit_prestataire(Prestataire pres1, Prestataire pres);
 	List<Rdv_dispo> getdisponibility();
 	String modifier_dispojour(Rdv_dispo dispo, int id);
+	String ajouterprofil_prestataire(long prestataire, Prestataire pres);
 
 }

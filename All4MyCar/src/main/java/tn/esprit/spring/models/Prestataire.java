@@ -33,6 +33,22 @@ public class Prestataire {
 	private String photopres ;
 	private String specialisations ;
 	private int CIN ;
+	private int etat;
+    private String photoCin ;
+	public int getEtat() {
+		return etat;
+	}
+
+
+
+
+	public void setEtat(int etat) {
+		this.etat = etat;
+	}
+
+
+
+
 	@Temporal(TemporalType.DATE)
 	private Date date_inscrip;
 
@@ -232,6 +248,20 @@ public class Prestataire {
 
 	public void setRdvdispo(List<Rdv_dispo> rdvdispo) {
 		this.rdvdispo = rdvdispo;
+	}
+
+
+
+
+	public String getPhotoCin() {
+		return photoCin;
+	}
+
+
+
+
+	public void setPhotoCin(String photoCin) {
+		this.photoCin = photoCin;
 	}
 
 

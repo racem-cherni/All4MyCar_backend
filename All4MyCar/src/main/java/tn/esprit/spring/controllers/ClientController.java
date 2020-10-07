@@ -183,5 +183,105 @@ public class ClientController {
   	}
      
   
+   
+   @PostMapping("/ajoutclt_sansverif/{firstname}/{lastname}/{email}/{adresse}/{telnum}/{cin}/{datepermis}")
+	
+	public String ajouter_client(@PathVariable(value = "firstname") String firstname ,@PathVariable(value = "lastname") String lastname ,@PathVariable(value = "email") String email ,
+			@PathVariable(value = "adresse") String adresse , @PathVariable(value = "telnum") int telnum , @PathVariable(value = "cin")  int cin ,
+			@PathVariable(value = "datepermis") Date datepermis , @RequestParam("file") MultipartFile file
+			,@RequestParam("images[]") MultipartFile[] files)
+  {
+	   Client clt = new Client();
+	   
+	      
+	      File dir = new File(UPLOADED_FOLDER);
+	      if (!dir.exists())
+				dir.mkdirs();
+	      System.out.println("c bnsssssssssssssssssssaaaaaas ");
+	      File fileToImport = null;
+	      if (dir.isDirectory()) {
+	    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
+	    	  System.out.println(files.length);
+	    	  try {
+		        	
+	    			System.out.println("c bn ");
+		        	
+		            fileToImport = new File(dir + File.separator + file.getOriginalFilename());
+		            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
+		            stream.write(file.getBytes());
+		            stream.close();
+		            for ( int i=0;i<files.length;i++)
+		    		  {
+		            	 fileToImport = new File(dir + File.separator + files[i].getOriginalFilename());
+		 	            BufferedOutputStream streamm = new BufferedOutputStream(new FileOutputStream(fileToImport));
+		 	            streamm.write(files[i].getBytes());
+		 	            streamm.close();
+		    		  }
+		        } catch (Exception e) {
+		            System.out.println("nnnnnnnnn");
+		        }
+	      }
+	      String cincartePhoto ="";
+	      for ( int i=0;i<files.length;i++)
+	      {
+	    	  System.out.println(files[i].getOriginalFilename());
+	    	  if (i==0){
+	      	cincartePhoto=cincartePhoto+files[i].getOriginalFilename();
+	    	  } else cincartePhoto=cincartePhoto+","+files[i].getOriginalFilename();
+	      }
+	      clt.setCin_cartegrise_photo(cincartePhoto);
+	   clt.setAdresseclt(adresse);clt.setEmailclt(email);
+	   clt.setCIN(cin);clt.setTelclt(telnum);clt.setDate_permis(datepermis);clt.setFirstNameclt(firstname);clt.setLastNameclt(lastname);clt.setPhotoclt(file.getOriginalFilename());
+	   
+	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			String userName = ((UserDetails) principal).getUsername();
+		//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+			
+			 if (clientservice.Afficher_client_by_name(userName).getClient()!= null){
+					return clientservice.edit_client(clientservice.Afficher_client_by_name(userName).getClient(),clt);
+
+			   }
+			   else
+			return clientservice.ajouterclient_sansverif(clientservice.Afficher_client_by_name(userName).getId(),clt);			
+		}
+		return null;
+		
+	}
+   
+   @PostMapping("/ajoutclt_sansverif2/{firstname}/{lastname}/{email}/{adresse}/{telnum}/{cin}/{datepermis}")
+	
+ 	public String ajouter_client2(@PathVariable(value = "firstname") String firstname ,@PathVariable(value = "lastname") String lastname ,@PathVariable(value = "email") String email ,
+ 			@PathVariable(value = "adresse") String adresse , @PathVariable(value = "telnum") int telnum , @PathVariable(value = "cin")  int cin ,
+ 			@PathVariable(value = "datepermis") Date datepermis 
+ 			 )
+    {
+ 	   Client clt = new Client();
+ 	   
+ 	      
+ 	    
+ 	   clt.setAdresseclt(adresse);clt.setEmailclt(email);
+ 	   clt.setCIN(cin);clt.setTelclt(telnum);clt.setDate_permis(datepermis);clt.setFirstNameclt(firstname);clt.setLastNameclt(lastname);
+ 	   
+ 	  
+ 	
+ 	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+ 		if (principal instanceof UserDetails) {
+ 			String userName = ((UserDetails) principal).getUsername();
+ 		//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+ 			Client c = clientservice.Afficher_client_by_name(userName).getClient();
+ 			 clt.setPhotoclt(c.getPhotoclt());
+ 			   if (clientservice.Afficher_client_by_name(userName).getClient()!= null){
+ 					return clientservice.edit_client(clientservice.Afficher_client_by_name(userName).getClient(),clt);
+
+ 			   }
+ 			   else
+ 			return clientservice.ajouterclient_sansverif(clientservice.Afficher_client_by_name(userName).getId(),clt);
+ 			
+ 		}
+ 		return null;
+ 		
+ 	}
+    
 
 }

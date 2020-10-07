@@ -1,5 +1,7 @@
 package tn.esprit.spring.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +15,6 @@ import tn.esprit.spring.repository.UserRepository;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-	
 	
 	@Autowired
 	ClientRepository clientrepository ;
@@ -56,6 +57,17 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public User Afficher_client_by_name(String username) {
 		return userrepository.findByUsername(username).get();
+	}
+
+	@Override
+	public String ajouterclient_sansverif(Long id, Client clt) {
+		User user = userrepository.finduserbyid(id);
+		Date d = new Date() ;
+		clientrepository.save(clt);
+		user.setClient(clt);
+		userrepository.save(user);
+
+		return "client ajouté";
 	}
 	
 	

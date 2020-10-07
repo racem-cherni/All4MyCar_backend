@@ -216,6 +216,80 @@ public class PrestataireControlller {
 			
 		}
 
+	   
+	   
+	   @PostMapping("/ajoutprofilpres_sansverif/{firstNamepres}/{lastNamepres}/{adressepres}/{emailpres}/{telpres}/{specialisations}/{cin}")
+		
+		public String ajoutprofilpres_sansverif(@PathVariable(value = "firstNamepres") String firstNamepres ,@PathVariable(value = "lastNamepres") String lastNamepres ,@PathVariable(value = "adressepres") String adressepres ,
+				 @PathVariable(value = "emailpres") String emailpres , @PathVariable(value = "telpres")  int telpres ,@PathVariable(value = "specialisations") String specialisation,
+				@PathVariable(value ="cin")  int cin,@RequestParam("file") MultipartFile file,
+				@RequestParam("images[]") MultipartFile[] files)
+	   {
+		   Prestataire pres = new Prestataire();
+		   
+		      
+		      File dir = new File(UPLOADED_FOLDER);
+		      if (!dir.exists())
+					dir.mkdirs();
+		      System.out.println("c bnsssssssssssssssssssaaaaaas ");
+		      File fileToImport = null;
+		      if (dir.isDirectory()) {
+		    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
+		    	  try {
+			        	
+			        	System.out.println("c bn ");
+			        	
+			            fileToImport = new File(dir + File.separator + file.getOriginalFilename());
+			            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
+			            stream.write(file.getBytes());
+			            stream.close();
+			            for ( int i=0;i<files.length;i++)
+			    		  {
+			            	 fileToImport = new File(dir + File.separator + files[i].getOriginalFilename());
+			 	            BufferedOutputStream streamm = new BufferedOutputStream(new FileOutputStream(fileToImport));
+			 	            streamm.write(files[i].getBytes());
+			 	            streamm.close();
+			    		  }
+			        } catch (Exception e) {
+			            System.out.println("nnnnnnnnn");
+			        }
+		      }
+		      String cincartePhoto ="";
+		      for ( int i=0;i<files.length;i++)
+		      {
+		    	  System.out.println(files[i].getOriginalFilename());
+		    	  if (i==0){
+		      	cincartePhoto=cincartePhoto+files[i].getOriginalFilename();
+		    	  } else cincartePhoto=cincartePhoto+","+files[i].getOriginalFilename();
+		      }
+		       pres.setPhotoCin(cincartePhoto);
+			   pres.setFirstNamepres(firstNamepres);
+			   pres.setLastNamepres(lastNamepres);
+		       pres.setAdressepres(adressepres);
+		       pres.setEmailpres(emailpres);
+
+		       pres.setTelpres(telpres);
+		       pres.setSpecialisations(specialisation);
+		       pres.setCIN(cin);
+		        pres.setPhotopres(file.getOriginalFilename());
+		  // clt.setPhotoclt(file.getOriginalFilename());
+		   
+		   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				String userName = ((UserDetails) principal).getUsername();
+			//	System.err.println(clientservice.Afficher_client_by_name(userName).getClient());
+				
+				if (prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire()!= null){
+					return prestataireservice.edit_prestataire(prestataireservice.Afficher_prestataire_by_name(userName).getPrestataire(),pres);
+
+			   }
+			   else
+				return prestataireservice.ajouterprofil_prestataire(prestataireservice.Afficher_prestataire_by_name(userName).getId(), pres);
+				
+			}
+			return null;
+			
+		}
   
  
 }

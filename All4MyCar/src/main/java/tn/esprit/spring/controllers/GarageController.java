@@ -116,4 +116,54 @@ public ResponseEntity<InputStreamResource> getImage(@PathVariable(value = "image
 }
  
 
+@PostMapping("/addgaragee_sansverif/{nbrMecaniciens}/{date_ouverture}/{anneesexperiences}/{description}")
+
+public String addgaragee_sansverif(@PathVariable(value = "nbrMecaniciens") int nbrMecaniciens,@PathVariable(value = "date_ouverture") Date dateouverture,
+		@PathVariable(value = "anneesexperiences") int anneesexperiences,@PathVariable(value = "description") String description,@RequestParam("images[]") MultipartFile[] files)
+{
+   Garage garage = new Garage();
+   File dir = new File(UPLOADED_FOLDER);
+      if (!dir.exists())
+			dir.mkdirs();
+      System.out.println("c bnsssssssssssssssssssaaaaaas ");
+      File fileToImport = null;
+      if (dir.isDirectory()) {
+    	  System.out.println("c bnssssssssssssssssssssssssssssssssss ");
+    	  try {
+	        	
+	        	System.out.println("c bn ");
+	        	
+	        	 for ( int i=0;i<files.length;i++)
+	    		  {
+	            	 fileToImport = new File(dir + File.separator + files[i].getOriginalFilename());
+	 	            BufferedOutputStream streamm = new BufferedOutputStream(new FileOutputStream(fileToImport));
+	 	            streamm.write(files[i].getBytes());
+	 	            streamm.close();
+	    		  }
+	        } catch (Exception e) {
+	            System.out.println("nnnnnnnnn");
+	        }
+      }
+      String cincartePhoto ="";
+      for ( int i=0;i<files.length;i++)
+      {
+    	  System.out.println(files[i].getOriginalFilename());
+    	  if (i==0){
+      	cincartePhoto=cincartePhoto+files[i].getOriginalFilename();
+    	  } else cincartePhoto=cincartePhoto+","+files[i].getOriginalFilename();
+      }
+  
+      
+      garage.setAnnée_Experience(anneesexperiences);
+      garage.setDate_ouverture(dateouverture);
+     garage.setPhoto_garage(cincartePhoto);
+     garage.setDescription(description);      
+     garage.setNbr_Mecaniciens(nbrMecaniciens);
+     
+       //garage.setPhoto_garage(file.getOriginalFilename());
+  
+   
+   return garageservice.add_Garage(garage);
+	
+}
 }
