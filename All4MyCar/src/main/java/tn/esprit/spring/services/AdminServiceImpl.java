@@ -31,6 +31,12 @@ public class AdminServiceImpl  implements AdminService{
 UserRepository userrepository;
 
 @Autowired
+ClientService clientservice ;
+
+@Autowired
+PrestataireService prestataireservice ;
+
+@Autowired
 private JavaMailSender javaMailSender;
 
 @Autowired
@@ -99,13 +105,11 @@ PrestataireRepository prestataireRepository;
 		
 		Date d = new Date() ;
 	   
-			Client client = new Client();
-			client.setFirstNameclt(clt.getUsername());
-			client.setEmailclt(clt.getEmail());
+			Client client =  clientservice.Afficher_client_by_name(clt.getUsername()).getClient();
 			client.setDate_inscrip(d);
+			client.setEtat(1);
 			clientRepository.save(client);
 			clt.setEtat(true);//////////////////
-			clt.setClient(client);
 			userrepository.save(clt);
 			// SimpleMailMessage msg = new SimpleMailMessage();
 			// MimeMessage msg = javaMailSender.createMimeMessage();
@@ -143,13 +147,11 @@ PrestataireRepository prestataireRepository;
 		User clt = userrepository.finduserbyid(idpres);
 		Date d = new Date() ;
 	   
-		Prestataire pres = new Prestataire();
-		pres.setFirstNamepres(clt.getUsername());
-		pres.setEmailpres(clt.getEmail());
+		Prestataire pres = prestataireservice.Afficher_prestataire_by_name(clt.getUsername()).getPrestataire();
 		pres.setDate_inscrip(d);
+		pres.setEtat(1);
 		prestataireRepository.save(pres);
 		clt.setEtat(true);
-		clt.setPrestataire(pres);
 		userrepository.save(clt);
 		return "prestataire ajouté";
 
