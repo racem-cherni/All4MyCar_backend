@@ -21,4 +21,10 @@ public interface ClientRepository extends CrudRepository<Client, Long> {
  @Query("SELECT c from Client c where c.date_inscrip=:date")
  List<Client> findByDate_inscription(@Param("date") Date date_inscrip);
  
+ @Query("SELECT c from Client c where c.etat=0")
+	List<Client> findByEtat();
+ 
+ @Query("SELECT c from Client c where c.etat=0 and c.notif_etat=0")
+	List<Client> findByEtatnotification();
+ 
 }

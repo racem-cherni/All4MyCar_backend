@@ -95,6 +95,7 @@ return "profil modifie";
 	public String ajouterprofil_prestataire(long id, Prestataire press) {
 		User user = userrepository.finduserbyid(id);
 		Date d = new Date() ;
+		press.setDate_inscrip(d);
 		prestatairerepository.save(press);
 		user.setPrestataire(press);
 		userrepository.save(user);

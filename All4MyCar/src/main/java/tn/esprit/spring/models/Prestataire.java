@@ -35,6 +35,9 @@ public class Prestataire {
 	private int CIN ;
 	private int etat;
     private String photoCin ;
+	private boolean notif_etat ;
+
+    
 	public int getEtat() {
 		return etat;
 	}
@@ -262,6 +265,20 @@ public class Prestataire {
 
 	public void setPhotoCin(String photoCin) {
 		this.photoCin = photoCin;
+	}
+
+
+
+
+	public boolean isNotif_etat() {
+		return notif_etat;
+	}
+
+
+
+
+	public void setNotif_etat(boolean notif_etat) {
+		this.notif_etat = notif_etat;
 	}
 
 

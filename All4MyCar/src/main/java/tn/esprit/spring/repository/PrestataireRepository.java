@@ -29,6 +29,12 @@ public interface PrestataireRepository extends JpaRepository<Prestataire, Long> 
 	 @Query("SELECT c from Prestataire c where c.date_inscrip=:date")
 	 List<Prestataire> findByDate_inscription(@Param("date") Date date_inscrip);
 	 
+	 @Query("SELECT p from Prestataire p where p.etat=0")
+		List<Prestataire> findByEtat();
+	 
+	 @Query("SELECT p from Prestataire p where p.etat=0 and p.notif_etat=0")
+		List<Prestataire> findByEtatnotification();
+	 
 	 
 
 }

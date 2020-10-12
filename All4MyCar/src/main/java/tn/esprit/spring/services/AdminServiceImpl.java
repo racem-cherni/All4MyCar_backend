@@ -100,17 +100,19 @@ PrestataireRepository prestataireRepository;
 
 	}
 	@Override
-	public String Accepter_Client(long idclient) throws MessagingException, IOException {
-		User clt = userrepository.finduserbyid(idclient);
-		
+	public List<Client> Accepter_Client(long idclient) throws MessagingException, IOException {
+		//User clt = userrepository.finduserbyid(idclient);
+		  Client cl = clientRepository.findById(idclient).get();
+		  User user = userrepository.findByClientId(idclient);
 		Date d = new Date() ;
 	   
-			Client client =  clientservice.Afficher_client_by_name(clt.getUsername()).getClient();
-			client.setDate_inscrip(d);
-			client.setEtat(1);
-			clientRepository.save(client);
-			clt.setEtat(true);//////////////////
-			userrepository.save(clt);
+			//Client client =  clientservice.Afficher_client_by_name(clt.getUsername()).getClient();
+			cl.setDate_inscrip(d);
+			cl.setEtat(1);
+			clientRepository.save(cl);
+			user.setEtat(true);//////////////////
+			userrepository.save(user);
+			
 			// SimpleMailMessage msg = new SimpleMailMessage();
 			// MimeMessage msg = javaMailSender.createMimeMessage();
 		//	 MimeMessageHelper helper = new MimeMessageHelper(msg, true);
@@ -131,7 +133,7 @@ PrestataireRepository prestataireRepository;
 		        + "</body></html>", true);*/
 		        //helper.addAttachment("Capture d’écran 2020-10-02 104720.png", new ClassPathResource("/src/main/resources/Capture d’écran 2020-10-02 104720.png"));
 		      //  javaMailSender.send(msg);
-			return "client ajouté";
+			return clientRepository.findByEtat();
 			
 		
 		
@@ -143,17 +145,18 @@ PrestataireRepository prestataireRepository;
 		
 	}
 	@Override
-	public String Accepter_Pres(long idpres) {
-		User clt = userrepository.finduserbyid(idpres);
+	public List<Prestataire> Accepter_Pres(long idpres) {
+		//User clt = userrepository.finduserbyid(idpres);
+		Prestataire pres = prestataireRepository.findById(idpres).get();
 		Date d = new Date() ;
-	   
-		Prestataire pres = prestataireservice.Afficher_prestataire_by_name(clt.getUsername()).getPrestataire();
+	    User user = userrepository.findByPrestataireId(idpres);
+	//	Prestataire pres = prestataireservice.Afficher_prestataire_by_name(clt.getUsername()).getPrestataire();
 		pres.setDate_inscrip(d);
 		pres.setEtat(1);
 		prestataireRepository.save(pres);
-		clt.setEtat(true);
-		userrepository.save(clt);
-		return "prestataire ajouté";
+		user.setEtat(true);
+		userrepository.save(user);
+		return prestataireRepository.findByEtat();
 
 		
 	}
@@ -218,6 +221,44 @@ PrestataireRepository prestataireRepository;
 		}
 		//System.err.println(recherchepres);
 		return recherchepres ;
+	}
+	@Override
+	public List<Client> clientsinactifs() {
+		return clientRepository.findByEtat();
+	}
+	@Override
+	public List<Prestataire> prestatairesinactifs() {
+		return prestataireRepository.findByEtat();
+	}
+	
+	@Override
+	public List<Client> clientsinactifsnotifications() {
+		return clientRepository.findByEtatnotification();
+	}
+	@Override
+	public List<Prestataire> prestatairesinactifsnotifications() {
+		return prestataireRepository.findByEtatnotification();
+	}
+	@Override
+	public int nbrdemandesinscriptionsnotif() {
+		return clientRepository.findByEtatnotification().size() + prestataireRepository.findByEtatnotification().size() ; 
+	}
+	@Override
+	public int Demandesnotificationsaffiches() {
+		List<Client> cltnotis = clientRepository.findByEtatnotification();
+		List<Prestataire> presnotifs = prestataireRepository.findByEtatnotification();
+		for (int i=0;i<cltnotis.size();i++){
+			  cltnotis.get(i).setNotif_etat(true);
+			  clientRepository.save(cltnotis.get(i));
+			  
+		}
+		for (int i=0;i<presnotifs.size();i++){
+			presnotifs.get(i).setNotif_etat(true);
+			prestataireRepository.save(presnotifs.get(i));
+			
+		}
+		
+		return clientRepository.findByEtatnotification().size() + prestataireRepository.findByEtatnotification().size() ;
 	}
 
 }

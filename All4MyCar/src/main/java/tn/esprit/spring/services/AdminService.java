@@ -14,12 +14,14 @@ public interface AdminService {
 	
 List<User> findUser();
 List<User> findClientUser();
+List<Client> clientsinactifs();
+List<Prestataire> prestatairesinactifs(); 
 List<User>  findPrestataireUser();
 User Afficher_admin_by_name (String username);
-String Accepter_Client(long idclient)throws MessagingException, IOException;
+List<Client> Accepter_Client(long idclient)throws MessagingException, IOException;
    String refuser_client(long idclient);
    
-   String Accepter_Pres(long idpres);
+   List<Prestataire> Accepter_Pres(long idpres);
    String refuser_pres(long idpres);
    List<Client> getAllClient();
    List<Client> getAllClientbydateinscription(Date date);
@@ -34,6 +36,13 @@ String Accepter_Client(long idclient)throws MessagingException, IOException;
    String deletPrestataire(long idpres);
    Client detailclient(long idclt);
    Prestataire detailprestataire(long idpres);
+   
+   List<Client> clientsinactifsnotifications();
+   List<Prestataire> prestatairesinactifsnotifications();
+   
+   int nbrdemandesinscriptionsnotif();
+   
+   int Demandesnotificationsaffiches() ;
    
 
 }

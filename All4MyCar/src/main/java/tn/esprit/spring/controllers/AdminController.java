@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,17 +43,43 @@ public class AdminController {
 }
 @GetMapping("/getclientsinactifs")
 
-public List<User> getallclientsinactives() {
-return adminservice.findClientUser();
+public List<Client> getallclientsinactives() {
+return adminservice.clientsinactifs();
 
 }
 @GetMapping("/getprestataireinactifs")
 
-public List<User> getallprestatairesinactives() {
-return adminservice.findPrestataireUser();
+public List<Prestataire> getallprestatairesinactives() {
+return adminservice.prestatairesinactifs();
 
 }
 
+@GetMapping("/getnbrdemandesinscriptionsnotifications")
+
+public int getnbrdemandesinscriptionsnotifications() {
+return adminservice.nbrdemandesinscriptionsnotif();
+
+}
+
+@GetMapping("/getclientsinactifsnotifications")
+
+public List<Client> getallclientsinactivesnotifications() {
+return adminservice.clientsinactifsnotifications();
+
+}
+@GetMapping("/getprestataireinactifsnotifications")
+
+public List<Prestataire> getallprestatairesinactivesnotifications() {
+return adminservice.prestatairesinactifsnotifications();
+
+}
+
+@PutMapping("/setdemandesnotifications")
+
+public int setdemandesnotifications() {
+return adminservice.Demandesnotificationsaffiches();
+
+}
 @GetMapping("/Findadmin")
 
 	public Admin FindadminById() {
@@ -68,13 +95,13 @@ return adminservice.findPrestataireUser();
 	}
 
    @PostMapping("/adduserclient/{idclient}")
-   public String adduserclient(@PathVariable(value = "idclient") long idclient)throws MessagingException, IOException {
+   public List<Client> adduserclient(@PathVariable(value = "idclient") long idclient)throws MessagingException, IOException {
 	
 	return adminservice.Accepter_Client(idclient) ; 
 }
    
    @PostMapping("/adduserprestataire/{idpres}")
-   public String adduserprestataire(@PathVariable(value = "idpres") long idpres) {
+   public List<Prestataire> adduserprestataire(@PathVariable(value = "idpres") long idpres) {
 	
 	return adminservice.Accepter_Pres(idpres); 
 }

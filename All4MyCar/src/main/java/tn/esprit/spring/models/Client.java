@@ -51,6 +51,8 @@ public class Client implements Serializable {
 	
 	private int etat;
 	
+	private boolean notif_etat ;
+	
 	private int telclt;
 	private String adresseclt;
 	
@@ -140,6 +142,13 @@ public class Client implements Serializable {
 	}
 	public void setCin_cartegrise_photo(String cin_cartegrise_photo) {
 		this.cin_cartegrise_photo = cin_cartegrise_photo;
+	}
+	public boolean isNotif_etat() {
+		return notif_etat;
+	}
+	
+	public void setNotif_etat(boolean notif_etat) {
+		this.notif_etat = notif_etat;
 	}
 	
 	

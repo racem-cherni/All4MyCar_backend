@@ -63,6 +63,7 @@ public class ClientServiceImpl implements ClientService {
 	public String ajouterclient_sansverif(Long id, Client clt) {
 		User user = userrepository.finduserbyid(id);
 		Date d = new Date() ;
+		clt.setDate_inscrip(d);
 		clientrepository.save(clt);
 		user.setClient(clt);
 		userrepository.save(user);
