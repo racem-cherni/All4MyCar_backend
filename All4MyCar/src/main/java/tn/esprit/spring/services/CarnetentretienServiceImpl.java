@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.models.Carburant_Carnet;
 import tn.esprit.spring.models.Depense_carnet;
 import tn.esprit.spring.models.Entretien_Carnet;
+import tn.esprit.spring.models.Historique_carnet;
 import tn.esprit.spring.models.Odometer_carnet;
 import tn.esprit.spring.models.Trajet_carnet;
 import tn.esprit.spring.repository.Carburant_CarnetRepository;
 import tn.esprit.spring.repository.Depense_CarnetRepository;
 import tn.esprit.spring.repository.Entretien_CarnetRepository;
+import tn.esprit.spring.repository.Historique_carnetRepository;
 import tn.esprit.spring.repository.Odometer_carnetRepository;
 import tn.esprit.spring.repository.Trajet_CarnetRepository;
 import tn.esprit.spring.repository.VehiculeRepository;
@@ -40,13 +42,19 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 	Trajet_CarnetRepository trajetrepository ;
 	
 	@Autowired 
+	Historique_carnetRepository historiquerepository ;
+	
+	@Autowired 
 	VehiculeRepository vehiculerepository ;
 	@Override
 	public String ajouter_carburant(Carburant_Carnet c) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
 			carburantrepository.save(c);
-
+            Historique_carnet hc = new Historique_carnet();
+            hc.setDate_ajout(c.getDate_carburant());
+            hc.setCarburant(c);
+            historiquerepository.save(hc);
 		}
 		return null;
 
@@ -57,6 +65,10 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
 			depenserepository.save(d);
+			Historique_carnet hc = new Historique_carnet();
+            hc.setDate_ajout(d.getDate_depense());
+            hc.setDepense(d);
+            historiquerepository.save(hc);
 
 		}
 		return null;
@@ -68,6 +80,10 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
 			entretienrepository.save(e);
+			Historique_carnet hc = new Historique_carnet();
+            hc.setDate_ajout(e.getDate_entretien());
+            hc.setEntretien(e);
+            historiquerepository.save(hc);
 
 		}
 		return null;
@@ -82,6 +98,10 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 			t.setHeure_arrive(addoneHour(t.getHeure_arrive()));
 
 			trajetrepository.save(t);
+			Historique_carnet hc = new Historique_carnet();
+            hc.setDate_ajout(t.getDate_depart());
+            hc.setTrajet(t);
+            historiquerepository.save(hc);
 
 		}
 		return null;
@@ -93,6 +113,10 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
 			odometerrepository.save(o);
+			Historique_carnet hc = new Historique_carnet();
+            hc.setDate_ajout(o.getDate_odometer());
+            hc.setOdometer(o);
+            historiquerepository.save(hc);
 
 		}
 		return null;
