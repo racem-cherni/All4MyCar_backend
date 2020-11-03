@@ -23,9 +23,10 @@ public class Depense_carnet implements Serializable {
 	private Long id;
 	@Temporal(TemporalType.DATE)
 	private Date date_depense;
-	private int prix_depense ;
+	private float prix_depense ;
 	private String note_depense;
-	private int odometer_depense;
+	private float odometer_depense;
+	private String depense ;
 	@OneToOne
 	private Vehicule vehicule ;
 	public Long getId() {
@@ -41,22 +42,24 @@ public class Depense_carnet implements Serializable {
 	public void setDate_depense(Date date_depense) {
 		this.date_depense = date_depense;
 	}
-	public int getPrix_depense() {
-		return prix_depense;
-	}
-	public void setPrix_depense(int prix_depense) {
-		this.prix_depense = prix_depense;
-	}
+	
 	public String getNote_depense() {
 		return note_depense;
 	}
 	public void setNote_depense(String note_depense) {
 		this.note_depense = note_depense;
 	}
-	public int getOdometer_depense() {
+	
+	public float getPrix_depense() {
+		return prix_depense;
+	}
+	public void setPrix_depense(float prix_depense) {
+		this.prix_depense = prix_depense;
+	}
+	public float getOdometer_depense() {
 		return odometer_depense;
 	}
-	public void setOdometer_depense(int odometer_depense) {
+	public void setOdometer_depense(float odometer_depense) {
 		this.odometer_depense = odometer_depense;
 	}
 	public Vehicule getVehicule() {
@@ -65,5 +68,12 @@ public class Depense_carnet implements Serializable {
 	public void setVehicule(Vehicule vehicule) {
 		this.vehicule = vehicule;
 	}
+	public String getDepense() {
+		return depense;
+	}
+	public void setDepense(String depense) {
+		this.depense = depense;
+	}
+	
 	
 }

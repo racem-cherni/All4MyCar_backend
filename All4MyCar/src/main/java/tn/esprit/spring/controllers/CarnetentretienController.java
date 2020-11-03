@@ -1,5 +1,7 @@
 package tn.esprit.spring.controllers;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,7 +48,7 @@ public class CarnetentretienController {
 	
 	
 	@PostMapping("/ajouter_trajet")
-	public String ajouter_trajet(@RequestBody Trajet_carnet t) {
+	public String ajouter_trajet(@RequestBody Trajet_carnet t) throws ParseException {
 		
 		return carnetservice.ajouter_trajet(t);
 	}

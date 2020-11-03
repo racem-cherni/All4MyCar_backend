@@ -22,10 +22,10 @@ public class Entretien_Carnet implements Serializable{
 	@Temporal(TemporalType.DATE)
       private Date date_entretien;
       private String centre_entretien;
-      private int prix_entretien;
+      private float prix_entretien;
       private String note_entretien;
-      private int odometer_entretien ;
-      private String specialisations;
+      private float odometer_entretien ;
+      private String specialisations;   
     
       @OneToOne
       private Vehicule vehicule;
@@ -47,24 +47,15 @@ public class Entretien_Carnet implements Serializable{
 	public void setCentre_entretien(String centre_entretien) {
 		this.centre_entretien = centre_entretien;
 	}
-	public int getPrix_entretien() {
-		return prix_entretien;
-	}
-	public void setPrix_entretien(int prix_entretien) {
-		this.prix_entretien = prix_entretien;
-	}
+	
 	public String getNote_entretien() {
 		return note_entretien;
 	}
 	public void setNote_entretien(String note_entretien) {
 		this.note_entretien = note_entretien;
 	}
-	public int getOdometer_entretien() {
-		return odometer_entretien;
-	}
-	public void setOdometer_entretien(int odometer_entretien) {
-		this.odometer_entretien = odometer_entretien;
-	}
+	
+	
 	public String getSpecialisations() {
 		return specialisations;
 	}
@@ -77,4 +68,18 @@ public class Entretien_Carnet implements Serializable{
 	public void setVehicule(Vehicule vehicule) {
 		this.vehicule = vehicule;
 	}
+	public float getPrix_entretien() {
+		return prix_entretien;
+	}
+	public void setPrix_entretien(float prix_entretien) {
+		this.prix_entretien = prix_entretien;
+	}
+	public float getOdometer_entretien() {
+		return odometer_entretien;
+	}
+	public void setOdometer_entretien(float odometer_entretien) {
+		this.odometer_entretien = odometer_entretien;
+	}
+	
+	
 }

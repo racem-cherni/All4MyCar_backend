@@ -32,6 +32,11 @@ public class SpecialisationServiceImpl implements SpecialisationService {
 		
 		return detailspecialisationrepository.findBySpecialisationId(idspecialisation);
 	}
+
+	@Override
+	public List<Details_Specialisations> finddetailsSpecialisation() {
+		return detailspecialisationrepository.findAll();
+	}
 	
 	
 

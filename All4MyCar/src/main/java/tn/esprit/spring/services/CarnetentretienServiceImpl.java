@@ -1,5 +1,9 @@
 package tn.esprit.spring.services;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -71,9 +75,12 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 	}
 
 	@Override
-	public String ajouter_trajet(Trajet_carnet t) {
+	public String ajouter_trajet(Trajet_carnet t) throws ParseException {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
+			t.setHeure_depart(addoneHour(t.getHeure_depart()));
+			t.setHeure_arrive(addoneHour(t.getHeure_arrive()));
+
 			trajetrepository.save(t);
 
 		}
@@ -90,6 +97,22 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		}
 		return null;
 
+	}
+	
+	
+	public Date addoneHour (Date heure) throws ParseException{
+		if (heure!=null){
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(heure); 
+		c.add(Calendar.HOUR_OF_DAY, 1);
+		Date d = c.getTime();
+		System.out.println("tryaddone"+""+c.getTime());
+		System.out.println(d);
+		
+		//Time timeValue = new Time(d.getTime());
+
+		return d;
+		}else return null;
 	}
 
 }

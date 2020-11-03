@@ -23,10 +23,10 @@ public class Carburant_Carnet implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date_carburant;
 	private String station_carburant;
-	private int quantite_carburant;
-	private int depense_carburant;
-	private int odometer_carburant;
-	private int note_carburant;
+	private float quantite_carburant;
+	private float depense_carburant;
+	private float odometer_carburant;
+	private String note_carburant;
 	@OneToOne
 	private Vehicule vehicule ;
 	public Long getId() {
@@ -48,30 +48,48 @@ public class Carburant_Carnet implements Serializable {
 	public void setStation_carburant(String station_carburant) {
 		this.station_carburant = station_carburant;
 	}
-	public int getQuantite_carburant() {
+
+
+	public float getQuantite_carburant() {
 		return quantite_carburant;
 	}
-	public void setQuantite_carburant(int quantite_carburant) {
+
+	public void setQuantite_carburant(float quantite_carburant) {
 		this.quantite_carburant = quantite_carburant;
 	}
-	public int getDepense_carburant() {
+
+	public float getDepense_carburant() {
 		return depense_carburant;
 	}
-	public void setDepense_carburant(int depense_carburant) {
+
+	public void setDepense_carburant(float depense_carburant) {
 		this.depense_carburant = depense_carburant;
 	}
-	public int getOdometer_carburant() {
+
+	public float getOdometer_carburant() {
 		return odometer_carburant;
 	}
-	public void setOdometer_carburant(int odometer_carburant) {
+
+	public void setOdometer_carburant(float odometer_carburant) {
 		this.odometer_carburant = odometer_carburant;
 	}
-	public int getNote_carburant() {
+
+	public String getNote_carburant() {
 		return note_carburant;
 	}
-	public void setNote_carburant(int note_carburant) {
+
+	public void setNote_carburant(String note_carburant) {
 		this.note_carburant = note_carburant;
 	}
+
+	public Vehicule getVehicule() {
+		return vehicule;
+	}
+
+	public void setVehicule(Vehicule vehicule) {
+		this.vehicule = vehicule;
+	}
+
 	
 	
 	

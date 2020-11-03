@@ -1,5 +1,7 @@
 package tn.esprit.spring.services;
 
+import java.text.ParseException;
+
 import tn.esprit.spring.models.Carburant_Carnet;
 import tn.esprit.spring.models.Depense_carnet;
 import tn.esprit.spring.models.Entretien_Carnet;
@@ -14,7 +16,7 @@ public interface CarnetentretienService {
 
 	String ajouter_entretien(Entretien_Carnet e);
 
-	String ajouter_trajet(Trajet_carnet t);
+	String ajouter_trajet(Trajet_carnet t) throws ParseException;
 
 	String ajouter_odometer(Odometer_carnet o);
 

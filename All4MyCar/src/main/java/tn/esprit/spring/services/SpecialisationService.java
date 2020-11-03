@@ -11,6 +11,7 @@ public interface SpecialisationService {
 	
 	List<Specialisations> findallspecialisations();
 	List<Details_Specialisations> finddetailsSpecialisationbyId(long idspecialisation);
+	List<Details_Specialisations> finddetailsSpecialisation();
 
 
 }

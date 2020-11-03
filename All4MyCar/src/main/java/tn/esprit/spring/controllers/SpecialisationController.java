@@ -39,4 +39,10 @@ return specialisationservice.finddetailsSpecialisationbyId(id);
 
 }
 
+@GetMapping("/getdetailspecialisationn")
+
+public List<Details_Specialisations> getdetailspecialisations() {
+return specialisationservice.finddetailsSpecialisation();
+
+}
 }

@@ -1,3 +1,4 @@
+
 package tn.esprit.spring.models;
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class Odometer_carnet implements Serializable {
    private Long id ;
 	@Temporal(TemporalType.DATE)
     private Date   date_odometer;
-   private int  odomoeter_cal;
+   private float  odomoeter_cal;
    private String  note_odometer ;
    @OneToOne
     private Vehicule vehicule;
@@ -36,12 +37,7 @@ public Date getDate_odometer() {
 public void setDate_odometer(Date date_odometer) {
 	this.date_odometer = date_odometer;
 }
-public int getOdomoeter_cal() {
-	return odomoeter_cal;
-}
-public void setOdomoeter_cal(int odomoeter_cal) {
-	this.odomoeter_cal = odomoeter_cal;
-}
+
 public String getNote_odometer() {
 	return note_odometer;
 }
@@ -54,5 +50,13 @@ public Vehicule getVehicule() {
 public void setVehicule(Vehicule vehicule) {
 	this.vehicule = vehicule;
 }
+public float getOdomoeter_cal() {
+	return odomoeter_cal;
+}
+public void setOdomoeter_cal(float odomoeter_cal) {
+	this.odomoeter_cal = odomoeter_cal;
+}
+
+
    
 }
