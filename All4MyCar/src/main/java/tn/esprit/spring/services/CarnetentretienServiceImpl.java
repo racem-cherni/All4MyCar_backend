@@ -3,6 +3,7 @@ package tn.esprit.spring.services;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,11 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.models.Carburant_Carnet;
+import tn.esprit.spring.models.Client;
 import tn.esprit.spring.models.Depense_carnet;
 import tn.esprit.spring.models.Entretien_Carnet;
 import tn.esprit.spring.models.Historique_carnet;
 import tn.esprit.spring.models.Odometer_carnet;
 import tn.esprit.spring.models.Trajet_carnet;
+import tn.esprit.spring.models.Vehicule;
 import tn.esprit.spring.repository.Carburant_CarnetRepository;
 import tn.esprit.spring.repository.Depense_CarnetRepository;
 import tn.esprit.spring.repository.Entretien_CarnetRepository;
@@ -40,10 +43,12 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 
 	@Autowired 
 	Trajet_CarnetRepository trajetrepository ;
-	
+	@Autowired
+	Historique_carnetRepository historiquecarnetrepository;
 	@Autowired 
 	Historique_carnetRepository historiquerepository ;
-	
+	@Autowired
+	ClientService clientservice ;
 	@Autowired 
 	VehiculeRepository vehiculerepository ;
 	@Override
@@ -54,6 +59,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
             Historique_carnet hc = new Historique_carnet();
             hc.setDate_ajout(c.getDate_carburant());
             hc.setCarburant(c);
+            hc.setVehicule(c.getVehicule());
             historiquerepository.save(hc);
 		}
 		return null;
@@ -68,6 +74,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 			Historique_carnet hc = new Historique_carnet();
             hc.setDate_ajout(d.getDate_depense());
             hc.setDepense(d);
+            hc.setVehicule(d.getVehicule());
             historiquerepository.save(hc);
 
 		}
@@ -83,6 +90,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 			Historique_carnet hc = new Historique_carnet();
             hc.setDate_ajout(e.getDate_entretien());
             hc.setEntretien(e);
+            hc.setVehicule(e.getVehicule());
             historiquerepository.save(hc);
 
 		}
@@ -101,6 +109,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 			Historique_carnet hc = new Historique_carnet();
             hc.setDate_ajout(t.getDate_depart());
             hc.setTrajet(t);
+            hc.setVehicule(t.getVehicule());
             historiquerepository.save(hc);
 
 		}
@@ -116,6 +125,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 			Historique_carnet hc = new Historique_carnet();
             hc.setDate_ajout(o.getDate_odometer());
             hc.setOdometer(o);
+            hc.setVehicule(o.getVehicule());
             historiquerepository.save(hc);
 
 		}
@@ -123,7 +133,7 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 
 	}
 	
-	
+	@Override
 	public Date addoneHour (Date heure) throws ParseException{
 		if (heure!=null){
 		Calendar c = Calendar.getInstance(); 
@@ -137,6 +147,41 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 
 		return d;
 		}else return null;
+	}
+
+	@Override
+	public List<Carburant_Carnet> findCarburant(Vehicule vehicule) {
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				String userName = ((UserDetails) principal).getUsername();
+				Client clt  = clientservice.Afficher_client_by_name(userName).getClient();
+				return carburantrepository.findByVehicule(vehicule);
+	}
+	return null;
+	}
+
+	@Override
+	public List<Depense_carnet> findDepense(int idvehicule) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Entretien_Carnet> findEntretien(int idvehicule) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Odometer_carnet> findOdometer(int idvehicule) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Trajet_carnet> findTrajet(int idvehicule) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

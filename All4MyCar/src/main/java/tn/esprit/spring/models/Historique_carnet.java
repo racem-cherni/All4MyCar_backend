@@ -35,7 +35,8 @@ public class Historique_carnet {
 	
 	@OneToOne
 	private Odometer_carnet odometer;
-	
+	@OneToOne
+	private Vehicule vehicule;
 	@Temporal(TemporalType.DATE)
 	private Date date_ajout;
 
@@ -93,6 +94,14 @@ public class Historique_carnet {
 
 	public void setDate_ajout(Date date_ajout) {
 		this.date_ajout = date_ajout;
+	}
+
+	public Vehicule getVehicule() {
+		return vehicule;
+	}
+
+	public void setVehicule(Vehicule vehicule) {
+		this.vehicule = vehicule;
 	}
 	
 	
