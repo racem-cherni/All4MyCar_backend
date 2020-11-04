@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(	name = "carnet_historique")
 public class Historique_carnet {
@@ -37,7 +39,8 @@ public class Historique_carnet {
 	private Odometer_carnet odometer;
 	@OneToOne
 	private Vehicule vehicule;
-	@Temporal(TemporalType.DATE)
+	
+	@DateTimeFormat
 	private Date date_ajout;
 
 	public Long getId() {
