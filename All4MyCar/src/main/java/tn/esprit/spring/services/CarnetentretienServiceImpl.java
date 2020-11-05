@@ -183,5 +183,33 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
+	
+	
+	//////////////////////////////////////
+
+	@Override
+	public List<Carburant_Carnet> getCarburantParPeriode(long vehiculeId, String periode) {
+		Date d = new Date();
+		if (periode.equals("THIS_MONTH"))
+			return carburantrepository.getCarburantParMois(vehiculeId,d);
+
+		else if (periode.equals("LAST_MONTH"))
+			return carburantrepository.getCarburantParDernierMois(vehiculeId,d);
+
+		else if (periode.equals("THIS_YEAR"))
+			return carburantrepository.getCarburantParAnnee(vehiculeId,d);
+	
+		else return carburantrepository.getCarburantAll(vehiculeId);
+
+	}
+
+	@Override
+	public int getDepense_carburantMois(Carburant_Carnet[] carburantlist) {
+		System.out.println("im here");
+		return 2;
+	}
 
 }

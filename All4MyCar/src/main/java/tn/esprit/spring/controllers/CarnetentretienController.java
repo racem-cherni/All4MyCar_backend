@@ -1,10 +1,13 @@
 package tn.esprit.spring.controllers;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +17,10 @@ import tn.esprit.spring.models.Carburant_Carnet;
 import tn.esprit.spring.models.Client;
 import tn.esprit.spring.models.Depense_carnet;
 import tn.esprit.spring.models.Entretien_Carnet;
+import tn.esprit.spring.models.Historique_carnet;
 import tn.esprit.spring.models.Odometer_carnet;
 import tn.esprit.spring.models.Trajet_carnet;
+import tn.esprit.spring.models.Vehicule;
 import tn.esprit.spring.services.CarnetentretienService;
 
 @RestController
@@ -58,5 +63,17 @@ public class CarnetentretienController {
 	public String ajouter_odometer(@RequestBody Odometer_carnet o) {
 		
 		return carnetservice.ajouter_odometer(o);
+	}
+	
+	
+	
+	////////////////////////////////////////////////
+	@GetMapping("/getCarburantParPeriode/{idvehicule}/{periode}")
+	public List <Carburant_Carnet> getCarburantParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+		 return carnetservice.getCarburantParPeriode(vehiculeId,periode);
+	}
+			@GetMapping("/getDepense_carburantMois/{idvehicule}")
+		 public int getDepense_carburantMois(@PathVariable(value = "idvehicule") Carburant_Carnet[] carburantlist){
+			 return carnetservice.getDepense_carburantMois(carburantlist);
 	}
 }
