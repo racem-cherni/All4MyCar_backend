@@ -205,7 +205,65 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		else return carburantrepository.getCarburantAll(vehiculeId);
 
 	}
+	
+	public List<Entretien_Carnet> getEntretienParPeriode(long vehiculeId, String periode) {
+		Date d = new Date();
+		if (periode.equals("THIS_MONTH"))
+			return entretienrepository.getEntretienParMois(vehiculeId,d);
 
+		else if (periode.equals("LAST_MONTH"))
+			return entretienrepository.getEntretienParDernierMois(vehiculeId,d);
+
+		else if (periode.equals("THIS_YEAR"))
+			return entretienrepository.getEntretienParAnnee(vehiculeId,d);
+	
+		else return entretienrepository.getEntretienAll(vehiculeId);
+
+	}
+	
+	public List<Odometer_carnet> getOdometerParPeriode(long vehiculeId, String periode) {
+		Date d = new Date();
+		if (periode.equals("THIS_MONTH"))
+			return odometerrepository.getOdometerParMois(vehiculeId,d);
+
+		else if (periode.equals("LAST_MONTH"))
+			return odometerrepository.getOdometerParDernierMois(vehiculeId,d);
+
+		else if (periode.equals("THIS_YEAR"))
+			return odometerrepository.getOdometerParAnnee(vehiculeId,d);
+	
+		else return odometerrepository.getOdometerAll(vehiculeId);
+
+	}
+	public List<Trajet_carnet> getTrajetParPeriode(long vehiculeId, String periode) {
+		Date d = new Date();
+		if (periode.equals("THIS_MONTH"))
+			return trajetrepository.getTrajetParMois(vehiculeId,d);
+
+		else if (periode.equals("LAST_MONTH"))
+			return trajetrepository.getTrajetParDernierMois(vehiculeId,d);
+
+		else if (periode.equals("THIS_YEAR"))
+			return trajetrepository.getTrajetParAnnee(vehiculeId,d);
+	
+		else return trajetrepository.getTrajetAll(vehiculeId);
+
+	}
+
+	public List<Depense_carnet> getDepenseParPeriode(long vehiculeId, String periode) {
+		Date d = new Date();
+		if (periode.equals("THIS_MONTH"))
+			return depenserepository.getDepenseParMois(vehiculeId,d);
+
+		else if (periode.equals("LAST_MONTH"))
+			return depenserepository.getDepenseParDernierMois(vehiculeId,d);
+
+		else if (periode.equals("THIS_YEAR"))
+			return depenserepository.getDepenseParAnnee(vehiculeId,d);
+	
+		else return depenserepository.getDepenseAll(vehiculeId);
+
+	}
 	@Override
 	public int getDepense_carburantMois(Carburant_Carnet[] carburantlist) {
 		System.out.println("im here");

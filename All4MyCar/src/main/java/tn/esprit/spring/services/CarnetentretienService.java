@@ -37,4 +37,15 @@ List<Carburant_Carnet> getCarburantParPeriode(long vehiculeId, String periode);
 
 int getDepense_carburantMois(Carburant_Carnet[] carburantlist);
 
+List<Entretien_Carnet> getEntretienParPeriode(long vehiculeId, String periode);
+
+List<Odometer_carnet> getOdometerParPeriode(long vehiculeId, String periode);
+
+
+List<Trajet_carnet> getTrajetParPeriode(long vehiculeId, String periode);
+
+
+List<Depense_carnet> getDepenseParPeriode(long vehiculeId, String periode);
+
+
 }

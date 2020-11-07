@@ -68,12 +68,37 @@ public class CarnetentretienController {
 	
 	
 	////////////////////////////////////////////////
-	@GetMapping("/getCarburantParPeriode/{idvehicule}/{periode}")
-	public List <Carburant_Carnet> getCarburantParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
-		 return carnetservice.getCarburantParPeriode(vehiculeId,periode);
+	        @GetMapping("/getCarburantParPeriode/{idvehicule}/{periode}")
+	        public List <Carburant_Carnet> getCarburantParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+		         return carnetservice.getCarburantParPeriode(vehiculeId,periode);
 	}
+	
+	        @GetMapping("/getEntretienParPeriode/{idvehicule}/{periode}")
+			public List <Entretien_Carnet> getEntretienParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getEntretienParPeriode(vehiculeId,periode);
+			}
+			
+	        @GetMapping("/getDepenseParPeriode/{idvehicule}/{periode}")
+			public List <Depense_carnet> getDepenseParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getDepenseParPeriode(vehiculeId,periode);
+			}
+	
+			@GetMapping("/getOdometerParPeriode/{idvehicule}/{periode}")
+			public List <Odometer_carnet> getOdometerParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getOdometerParPeriode(vehiculeId,periode);
+			}
+
+			@GetMapping("/getTrajetParPeriode/{idvehicule}/{periode}")
+			public List <Trajet_carnet> getTrajetParPeriode(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getTrajetParPeriode(vehiculeId,periode);
+			}
+
+			
+			
+			
+			/////////////
 			@GetMapping("/getDepense_carburantMois/{idvehicule}")
-		 public int getDepense_carburantMois(@PathVariable(value = "idvehicule") Carburant_Carnet[] carburantlist){
-			 return carnetservice.getDepense_carburantMois(carburantlist);
-	}
+			 public int getDepense_carburantMois(@PathVariable(value = "idvehicule") Carburant_Carnet[] carburantlist){
+				 return carnetservice.getDepense_carburantMois(carburantlist);
+		}
 }
