@@ -97,8 +97,42 @@ public class CarnetentretienController {
 			
 			
 			/////////////
-			@GetMapping("/getDepense_carburantMois/{idvehicule}")
-			 public int getDepense_carburantMois(@PathVariable(value = "idvehicule") Carburant_Carnet[] carburantlist){
-				 return carnetservice.getDepense_carburantMois(carburantlist);
+			@GetMapping("/getDepense_carburantMois/{idvehicule}/{periode}")
+			 public float getDepense_carburantMois(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getDepense_carburantMois(vehiculeId,periode);
 		}
+			@GetMapping("/getRemplis_carburantMois/{idvehicule}/{periode}")
+			 public float getRemplis_carburantMois(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getRemplis_carburantMois(vehiculeId,periode);
+		}
+			
+			//////
+			@GetMapping("/getNbr_entretienMois/{idvehicule}/{periode}")
+			 public float getNbr_entretienMois(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getNbr_entretienMois(vehiculeId,periode);
+		}
+			@GetMapping("/getDepense_entretienMois/{idvehicule}/{periode}")
+			 public float getDepense_entretienMois(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getDepense_entretienMois(vehiculeId,periode);
+		}
+			////////////////
+			@GetMapping("/getKilometrage_jour/{idvehicule}/{periode}")
+			 public float getKilometrage_jour(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getKilometrage_jour(vehiculeId,periode);
+		}
+			@GetMapping("/getKilometrage_semaine/{idvehicule}/{periode}")
+			 public float getKilometrage_semaine(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getKilometrage_semaine(vehiculeId,periode);
+		}
+			
+			@GetMapping("/getKilometrage_mois/{idvehicule}/{periode}")
+			 public float getKilometrage_mois(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getKilometrage_mois(vehiculeId,periode);
+		}
+			@GetMapping("/getKilometrage_annee/{idvehicule}/{periode}")
+			 public float getKilometrage_annee(@PathVariable(value = "idvehicule") long vehiculeId,@PathVariable(value = "periode") String periode){
+				 return carnetservice.getKilometrage_annee(vehiculeId,periode);
+		}
+
+			
 }

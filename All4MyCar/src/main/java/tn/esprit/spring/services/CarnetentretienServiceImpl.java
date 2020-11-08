@@ -2,6 +2,7 @@ package tn.esprit.spring.services;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -265,9 +266,712 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 
 	}
 	@Override
-	public int getDepense_carburantMois(Carburant_Carnet[] carburantlist) {
-		System.out.println("im here");
-		return 2;
+	public float getDepense_carburantMois(long vehiculeId, String periode) {
+		Date d = new Date();
+		System.out.println("im hereperidoee "+periode);
+
+		List<Float> tm = Collections.emptyList();float stm=0;
+
+		if (periode.equals("THIS_MONTH")){
+			tm =carburantrepository.getDepense_carburantMoisTM(vehiculeId,d);
+			System.out.println("size "+tm.size());
+
+			if( !tm.isEmpty()){
+		for (int i=0;i<tm.size();i++){
+			System.out.println("im hereTM "+tm.get(i));
+
+			stm+=tm.get(i);
+		}
+		stm=stm/tm.size();
+		System.out.println("im hereTM "+stm);
+
+		}
+		}
+
+		else if (periode.equals("LAST_MONTH")){
+			tm =carburantrepository.getDepense_carburantMoisLM(vehiculeId,d);
+			System.out.println("size "+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("im hereLM "+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereLM "+stm);
+
+				}
+			}
+		else if (periode.equals("THIS_YEAR")){
+			tm =carburantrepository.getDepense_carburantMoisTY(vehiculeId,d);
+			System.out.println("size "+tm.size());
+
+			if( !tm.isEmpty()){
+				for (int i=0;i<tm.size();i++){
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereTY "+stm);
+
+				}	
+			}
+		else {  
+			tm =carburantrepository.getDepense_carburantMoisAT(vehiculeId);
+			System.out.println("size "+tm.size());
+
+			if( !tm.isEmpty()){
+				for (int i=0;i<tm.size();i++){
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+
+				}
+		}
+		System.out.println("im here "+stm);
+		return stm;
+
+		
+	}
+	
+	@Override
+	public float getRemplis_carburantMois(long vehiculeId, String periode) {
+		Date d = new Date();
+		System.out.println("im hereperidoee "+periode);
+
+		List<Float> tm = Collections.emptyList();float stm=0;
+
+		if (periode.equals("THIS_MONTH")){
+			tm =carburantrepository.getRemplis_carburantMoisTM(vehiculeId);
+			System.out.println("size TM"+tm.size());
+
+			if( !tm.isEmpty()){
+		for (int i=0;i<tm.size();i++){
+			System.out.println("im hereTM "+tm.get(i));
+
+			stm+=tm.get(i);
+		}
+		stm=stm/tm.size();
+		System.out.println("im hereTM "+stm);
+
+		}
+		}
+
+		else if (periode.equals("LAST_MONTH")){
+			tm =carburantrepository.getRemplis_carburantMoisLM(vehiculeId,d);
+
+			if( !tm.isEmpty()){
+				System.out.println("im hereLM "+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereLM "+stm);
+
+				}
+			}
+		else if (periode.equals("THIS_YEAR")){
+			tm =carburantrepository.getRemplis_carburantMoisTY(vehiculeId,d);
+			System.out.println("size TY"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size TY2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get TY"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereTY "+stm);
+
+				}	
+			}
+		else if (periode.equals("ALLTIME")) {  
+			tm =carburantrepository.getRemplis_carburantMoisAT(vehiculeId);
+			System.out.println("size AT"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size AT2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get AT"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im here AT "+stm);
+
+				}
+		}
+		System.out.println("im here "+stm);
+		return stm;
+
+		
+	}
+	
+	
+	
+
+	@Override
+	public float getNbr_entretienMois(long vehiculeId, String periode) {
+		Date d = new Date();
+		System.out.println("im hereperidoee "+periode);
+
+		List<Float> tm = Collections.emptyList();float stm=0;
+
+		if (periode.equals("THIS_MONTH")){
+			tm =entretienrepository.getNbr_entretienMoisTM(vehiculeId);
+			System.out.println("size TM"+tm.size());
+
+			if( !tm.isEmpty()){
+		for (int i=0;i<tm.size();i++){
+			System.out.println("im hereTM "+tm.get(i));
+
+			stm+=tm.get(i);
+		}
+		stm=stm/tm.size();
+		System.out.println("im hereTM "+stm);
+
+		}
+		}
+
+		else if (periode.equals("LAST_MONTH")){
+			tm =entretienrepository.getNbr_entretienMoisLM(vehiculeId,d);
+
+			if( !tm.isEmpty()){
+				System.out.println("im hereLM "+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereLM "+stm);
+
+				}
+			}
+		else if (periode.equals("THIS_YEAR")){
+			tm =entretienrepository.getNbr_entretienMoisTY(vehiculeId,d);
+			System.out.println("size TY"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size TY2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get TY"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereTY "+stm);
+
+				}	
+			}
+		else if (periode.equals("ALLTIME")) {  
+			tm =entretienrepository.getNbr_entretienMoisAT(vehiculeId);
+			System.out.println("size AT"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size AT2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get AT"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im here AT "+stm);
+
+				}
+		}
+		System.out.println("im here "+stm);
+		return stm;
+	}
+
+	@Override
+	public float getDepense_entretienMois(long vehiculeId, String periode) {
+		Date d = new Date();
+		System.out.println("im hereperidoee "+periode);
+
+		List<Float> tm = Collections.emptyList();float stm=0;
+
+		if (periode.equals("THIS_MONTH")){
+			tm =entretienrepository.getDepense_entretienMoisTM(vehiculeId);
+			System.out.println("size TM"+tm.size());
+
+			if( !tm.isEmpty()){
+		for (int i=0;i<tm.size();i++){
+			System.out.println("im hereTM "+tm.get(i));
+
+			stm+=tm.get(i);
+		}
+		stm=stm/tm.size();
+		System.out.println("im hereTM "+stm);
+
+		}
+		}
+
+		else if (periode.equals("LAST_MONTH")){
+			tm =entretienrepository.getDepense_entretienMoisLM(vehiculeId,d);
+
+			if( !tm.isEmpty()){
+				System.out.println("im hereLM "+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereLM "+stm);
+
+				}
+			}
+		else if (periode.equals("THIS_YEAR")){
+			tm =entretienrepository.getDepense_entretienMoisTY(vehiculeId,d);
+			System.out.println("size TY"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size TY2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get TY"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im hereTY "+stm);
+
+				}	
+			}
+		else if (periode.equals("ALLTIME")) {  
+			tm =entretienrepository.getDepense_entretienMoisAT(vehiculeId);
+			System.out.println("size AT"+tm.size());
+
+			if( !tm.isEmpty()){
+				System.out.println("size AT2"+tm.size());
+
+				for (int i=0;i<tm.size();i++){
+					System.out.println("get AT"+" "+i+""+tm.get(i));
+
+					stm+=tm.get(i);
+				}
+				stm=stm/tm.size();
+				System.out.println("im here AT "+stm);
+
+				}
+		}
+		System.out.println("im here "+stm);
+		return stm;
+	}
+
+	
+	//////////////////kilometrage 
+	
+	@Override
+	public float getKilometrage_mois(long vehiculeId, String periode) {
+		Date d = new Date();
+		List<Date> ld = Collections.emptyList();int fail=0;int success=0;
+		List<Float> lo = Collections.emptyList(); float stm=0;int nbr=0;int i=0;
+		/////this_month
+		if ( periode.equals("THIS_MONTH")){
+		lo =odometerrepository.getKilometrageTMo(vehiculeId,d);
+		if( !lo.isEmpty()){
+			for (i=0;i<lo.size()-1;i++){
+                   stm=stm+(lo.get(i+1)-lo.get(i));					
+				}
+
+			}
+		}
+		
+	    /////last_month
+		else if( periode.equals("LAST_MONTH")){
+			lo =odometerrepository.getKilometrageLMo(vehiculeId,d);
+			if( !lo.isEmpty()){
+				for (i=0;i<lo.size()-1;i++){
+	                   stm=stm+(lo.get(i+1)-lo.get(i));					
+					}
+
+				}
+			}
+
+	    /////last_year
+		else if ( periode.equals("THIS_YEAR")){
+			lo =odometerrepository.getKilometrageTYo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageTYd(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						if (ld.get(i).getMonth()==ld.get(i+1).getMonth()){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+		}
+		/////all_time
+		else if ( periode.equals("ALLTIME")){
+			lo =odometerrepository.getKilometrageATo(vehiculeId);
+			ld = odometerrepository.getKilometrageATd(vehiculeId);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						if (ld.get(i).getMonth()==ld.get(i+1).getMonth() && ld.get(i).getYear()==ld.get(i+1).getYear() ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+			}		
+		return stm;
+		}
+/////////////////////////////////////////////////////////////////////kilometrage_semaine
+	@Override
+	public float getKilometrage_semaine(long vehiculeId, String periode) {
+		Calendar calendar = Calendar.getInstance();
+		Calendar calendar2 = Calendar.getInstance();
+
+		Date d = new Date();
+		List<Date> ld = Collections.emptyList();int fail=0;int success=0;
+		List<Float> lo = Collections.emptyList(); float stm=0;int nbr=0;int i=0;
+		/////this_month
+		if ( periode.equals("THIS_MONTH")){
+			lo =odometerrepository.getKilometrageTMo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageTMd(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						calendar.set(ld.get(i).getYear(),ld.get(i).getMonth(),ld.get(i).getDay());
+						calendar2.set(ld.get(i+1).getYear(),ld.get(i+1).getMonth(),ld.get(i+1).getDay());
+						
+						if (calendar.WEEK_OF_YEAR == calendar2.WEEK_OF_YEAR  ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+		}
+		
+	    /////last_month
+		else if( periode.equals("LAST_MONTH")){
+			lo =odometerrepository.getKilometrageLMo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageLMd(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						calendar.set(ld.get(i).getYear(),ld.get(i).getMonth(),ld.get(i).getDay());
+						calendar2.set(ld.get(i+1).getYear(),ld.get(i+1).getMonth(),ld.get(i+1).getDay());
+						
+						if (calendar.WEEK_OF_YEAR == calendar2.WEEK_OF_YEAR  ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+			}
+
+	    /////last_year
+		else if ( periode.equals("THIS_YEAR")){
+			lo =odometerrepository.getKilometrageTYo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageTYd(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						calendar.set(ld.get(i).getYear(),ld.get(i).getMonth(),ld.get(i).getDay());
+						calendar2.set(ld.get(i+1).getYear(),ld.get(i+1).getMonth(),ld.get(i+1).getDay());
+						
+						if (ld.get(i).getMonth()==ld.get(i+1).getMonth() && ld.get(i).getMonth()==ld.get(i+1).getMonth() 
+						&& calendar.WEEK_OF_YEAR == calendar2.WEEK_OF_YEAR  ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+		}
+		/////all_time
+		else if ( periode.equals("ALLTIME")){
+			lo =odometerrepository.getKilometrageATo(vehiculeId);
+			ld = odometerrepository.getKilometrageATd(vehiculeId);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						calendar.set(ld.get(i).getYear(),ld.get(i).getMonth(),ld.get(i).getDay());
+						calendar2.set(ld.get(i+1).getYear(),ld.get(i+1).getMonth(),ld.get(i+1).getDay());
+						
+						if (ld.get(i).getMonth()==ld.get(i+1).getMonth() && ld.get(i).getMonth()==ld.get(i+1).getMonth() 
+						&& ld.get(i).getYear()==ld.get(i+1).getYear() && calendar.WEEK_OF_YEAR == calendar2.WEEK_OF_YEAR  ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+			}		
+
+		return stm;
+	}
+
+/////////////////////////////////////////////////////////////////////kilometrage_jour
+
+	@Override
+	public float getKilometrage_jour(long vehiculeId, String periode) {
+		Date d = new Date();
+		List<Date> ld = Collections.emptyList();int fail=0;int success=0;
+		List<Float> lo = Collections.emptyList(); float stm=0;int nbr=0;int i=0;
+		/////this_month
+		if ( periode.equals("THIS_MONTH")){
+			lo =odometerrepository.getKilometrageTMo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageTMd(vehiculeId,d);
+			if( !lo.isEmpty()){
+				while(i<lo.size()-1 ){
+					if (ld.get(i).getDay()==ld.get(i+1).getDay()){
+					stm=stm+ (lo.get(i+1)-lo.get(i));
+					i++;
+					fail=0;
+					success=1;
+					}
+					else{
+						success=0;
+						if(fail==1) {i++;}
+						else{
+						fail++;
+					    i++;
+						nbr++;
+						}
+					}
+				}
+				if (success==1)  nbr++;
+				if(nbr!=0) stm=stm/nbr;
+
+		}
+		}
+		
+	    /////last_month
+		else if( periode.equals("LAST_MONTH")){
+			lo =odometerrepository.getKilometrageLMo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageLMd(vehiculeId,d);
+			if( !lo.isEmpty()){
+				while(i<lo.size()-1 ){
+					if (ld.get(i).getDay()==ld.get(i+1).getDay()){
+					stm=stm+ (lo.get(i+1)-lo.get(i));
+					i++;
+					fail=0;
+					success=1;
+					}
+					else{
+						success=0;
+						if(fail==1) {i++;}
+						else{
+						fail++;
+					    i++;
+						nbr++;
+						}
+					}
+				}
+				if (success==1)  nbr++;
+				if(nbr!=0) stm=stm/nbr;
+
+		}
+			}
+
+	    /////last_year
+		else if ( periode.equals("THIS_YEAR")){
+			lo =odometerrepository.getKilometrageTYo(vehiculeId,d);
+			ld = odometerrepository.getKilometrageTYd(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						if (ld.get(i).getDay()==ld.get(i+1).getDay() && ld.get(i).getMonth()==ld.get(i+1).getMonth()){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+		}
+		/////all_time
+		else if ( periode.equals("ALLTIME")){
+			lo =odometerrepository.getKilometrageATo(vehiculeId);
+			ld = odometerrepository.getKilometrageATd(vehiculeId);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						if (ld.get(i).getDay()==ld.get(i+1).getDay() && ld.get(i).getMonth()==ld.get(i+1).getMonth() && ld.get(i).getYear()==ld.get(i+1).getYear() ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+			}		
+		return stm;
+	}
+
+/////////////////////////////////////////////////////////////////////kilometrage_annee
+
+	@Override
+	public float getKilometrage_annee(long vehiculeId, String periode) {
+		Date d = new Date();
+		List<Date> ld = Collections.emptyList();int fail=0;int success=0;
+		List<Float> lo = Collections.emptyList(); float stm=0;int nbr=0;int i=0;
+		/////this_month
+		if ( periode.equals("THIS_MONTH")){
+	stm=0;
+		}
+		
+	    /////last_month
+		else if( periode.equals("LAST_MONTH")){
+			stm=0;
+			}
+
+	    /////last_year
+		else if ( periode.equals("THIS_YEAR")){
+			lo =odometerrepository.getKilometrageTYo(vehiculeId,d);
+
+			if( !lo.isEmpty()){
+				for (i=0;i<lo.size()-1;i++){
+	                   stm=stm+(lo.get(i+1)-lo.get(i));					
+					}
+			}
+		}
+		/////all_time
+		else if ( periode.equals("ALLTIME")){
+			lo =odometerrepository.getKilometrageATo(vehiculeId);
+			ld =odometerrepository.getKilometrageATd(vehiculeId);
+
+			if( !lo.isEmpty()){
+					while(i<lo.size()-1 ){
+						if (ld.get(i).getYear()==ld.get(i+1).getYear() ){
+						stm=stm+ (lo.get(i+1)-lo.get(i));
+						i++;
+						fail=0;
+						success=1;
+						}
+						else{
+							success=0;
+							if(fail==1) {i++;}
+							else{
+							fail++;
+						    i++;
+							nbr++;
+							}
+						}
+					}
+					if (success==1)  nbr++;
+					if(nbr!=0) stm=stm/nbr;
+
+			}
+			}		
+		return stm;
 	}
 
 }

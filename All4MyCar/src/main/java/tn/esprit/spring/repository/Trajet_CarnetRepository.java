@@ -19,12 +19,12 @@ public interface Trajet_CarnetRepository  extends JpaRepository<Trajet_carnet, L
 
 	@Query("Select "
 			+ "d from Trajet_carnet d where d.vehicule.id=:vi and "
-			+ "MONTH(d.date_depart) = MONTH(:d) ORDER BY d.date_depart asc ")
+			+ "MONTH(d.date_depart) = MONTH(:d) and YEAR(d.date_depart) = YEAR(:d) ORDER BY d.date_depart asc ")
 	List<Trajet_carnet> getTrajetParMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 	@Query("Select "
 			+ "d from Trajet_carnet d where d.vehicule.id=:vi and "
-			+ "MONTH(d.date_depart) = MONTH(:d)-1 ORDER BY d.date_depart asc ")
+			+ "MONTH(d.date_depart) = MONTH(:d)-1 and YEAR(d.date_depart) = YEAR(:d) ORDER BY d.date_depart asc ")
 	List<Trajet_carnet> getTrajetParDernierMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 	@Query("Select "

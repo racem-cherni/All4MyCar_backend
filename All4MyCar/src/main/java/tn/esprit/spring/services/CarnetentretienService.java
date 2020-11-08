@@ -35,7 +35,6 @@ List<Trajet_carnet> findTrajet(int idvehicule);
 
 List<Carburant_Carnet> getCarburantParPeriode(long vehiculeId, String periode);
 
-int getDepense_carburantMois(Carburant_Carnet[] carburantlist);
 
 List<Entretien_Carnet> getEntretienParPeriode(long vehiculeId, String periode);
 
@@ -47,5 +46,20 @@ List<Trajet_carnet> getTrajetParPeriode(long vehiculeId, String periode);
 
 List<Depense_carnet> getDepenseParPeriode(long vehiculeId, String periode);
 
+float getDepense_carburantMois(long vehiculeId, String periode);
+
+float getRemplis_carburantMois(long vehiculeId, String periode);
+
+float getNbr_entretienMois(long vehiculeId, String periode);
+
+float getDepense_entretienMois(long vehiculeId, String periode);
+
+float getKilometrage_mois(long vehiculeId, String periode);
+
+float getKilometrage_semaine(long vehiculeId, String periode);
+
+float getKilometrage_jour(long vehiculeId, String periode);
+
+float getKilometrage_annee(long vehiculeId, String periode);
 
 }

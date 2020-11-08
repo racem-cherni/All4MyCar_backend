@@ -21,12 +21,12 @@ List<Carburant_Carnet> getCarburantAll(@Param("vi") long vehiculeId);
 
 @Query("Select "
 		+ "d from Carburant_Carnet d where d.vehicule.id=:vi and "
-		+ "MONTH(d.date_carburant) = MONTH(:d) ORDER BY d.date_carburant asc ")
+		+ "MONTH(d.date_carburant) = MONTH(:d) and YEAR(d.date_carburant) = YEAR(:d) ORDER BY d.date_carburant asc ")
 List<Carburant_Carnet> getCarburantParMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 @Query("Select "
 		+ "d from Carburant_Carnet d where d.vehicule.id=:vi and "
-		+ "MONTH(d.date_carburant) = MONTH(:d)-1 ORDER BY d.date_carburant asc ")
+		+ "MONTH(d.date_carburant) = MONTH(:d)-1 and YEAR(d.date_carburant) = YEAR(:d) ORDER BY d.date_carburant asc ")
 List<Carburant_Carnet> getCarburantParDernierMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 @Query("Select "
@@ -34,8 +34,47 @@ List<Carburant_Carnet> getCarburantParDernierMois(@Param("vi") long vehiculeId,@
 		+ "YEAR(d.date_carburant) = YEAR(:d) ORDER BY d.date_carburant asc ")
 List<Carburant_Carnet> getCarburantParAnnee(@Param("vi") long vehiculeId,@Param("d") Date d);
 
+//////////////////depenseMois
+@Query("Select "
+		+ "sum(d.depense_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
+		+ "YEAR(d.date_carburant) = YEAR(:d) GROUP BY MONTH(d.date_carburant)  ")
+List<Float> getDepense_carburantMoisTY(@Param("vi") long vehiculeId, @Param("d") Date d);
 
+@Query("Select "
+		+ "sum(d.depense_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
+		+ "MONTH(d.date_carburant) = MONTH(:d) and YEAR(d.date_carburant) = YEAR(:d) GROUP BY Month(d.date_carburant)  ")
+List<Float> getDepense_carburantMoisTM(@Param("vi") long vehiculeId, @Param("d") Date d);
 
+@Query("Select "
+		+ "sum(d.depense_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
+		+ "MONTH(d.date_carburant) = MONTH(:d)-1 and YEAR(d.date_carburant) = YEAR(:d) GROUP BY Month(d.date_carburant)-1  ")
+List<Float> getDepense_carburantMoisLM(@Param("vi") long vehiculeId, @Param("d") Date d);
+
+@Query("Select "
+		+ "sum(d.depense_carburant) from Carburant_Carnet d where d.vehicule.id=:vi GROUP BY Month(d.date_carburant),YEAR(d.date_carburant) ")
+List<Float> getDepense_carburantMoisAT(@Param("vi") long vehiculeId);
+////////////////////
+
+//////////////////remplisMois
+@Query("Select "
++ "SUM(d.quantite_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
++ "YEAR(d.date_carburant) = YEAR(:d) GROUP BY MONTH(d.date_carburant)  ")
+List<Float> getRemplis_carburantMoisTY(@Param("vi") long vehiculeId, @Param("d") Date d);
+
+@Query("Select "
++ "SUM(d.quantite_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
++ "MONTH(d.date_carburant) = MONTH(CURDATE()) and YEAR(d.date_carburant) = YEAR(CURDATE()) GROUP BY MONTH(d.date_carburant) ")
+List<Float> getRemplis_carburantMoisTM(@Param("vi") long vehiculeId);
+
+@Query("Select "
++ "SUM(d.quantite_carburant) from Carburant_Carnet d where d.vehicule.id=:vi and "
++ "MONTH(d.date_carburant) = MONTH(:d)-1 and YEAR(d.date_carburant) = YEAR(:d) GROUP BY MONTH(d.date_carburant) ") 
+List<Float> getRemplis_carburantMoisLM(@Param("vi") long vehiculeId, @Param("d") Date d);
+
+@Query("Select "
++ "SUM(d.quantite_carburant) from Carburant_Carnet d where d.vehicule.id=:vi GROUP BY MONTH(d.date_carburant),YEAR(d.date_carburant) ")
+List<Float> getRemplis_carburantMoisAT(@Param("vi") long vehiculeId);
+////////////////////
 
 
 }

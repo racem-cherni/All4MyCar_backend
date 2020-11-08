@@ -20,17 +20,21 @@ public interface Depense_CarnetRepository extends JpaRepository<Depense_carnet, 
 
 	@Query("Select "
 			+ "d from Depense_carnet d where d.vehicule.id=:vi and "
-			+ "MONTH(d.date_depense) = MONTH(:d) ORDER BY d.date_depense asc ")
+			+ "MONTH(d.date_depense) = MONTH(:d) and YEAR(d.date_depense) = YEAR(:d) ORDER BY d.date_depense asc ")
 	List<Depense_carnet> getDepenseParMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 	@Query("Select "
 			+ "d from Depense_carnet d where d.vehicule.id=:vi and "
-			+ "MONTH(d.date_depense) = MONTH(:d)-1 ORDER BY d.date_depense asc ")
+			+ "MONTH(d.date_depense) = MONTH(:d)-1 and YEAR(d.date_depense) = YEAR(:d) ORDER BY d.date_depense asc ")
 	List<Depense_carnet> getDepenseParDernierMois(@Param("vi") long vehiculeId,@Param("d") Date d);
 
 	@Query("Select "
 			+ "d from Depense_carnet d where d.vehicule.id=:vi and "
 			+ "YEAR(d.date_depense) = YEAR(:d) ORDER BY d.date_depense asc ")
 	List<Depense_carnet> getDepenseParAnnee(@Param("vi") long vehiculeId,@Param("d") Date d);
+
+
+	
+
 	
 }
