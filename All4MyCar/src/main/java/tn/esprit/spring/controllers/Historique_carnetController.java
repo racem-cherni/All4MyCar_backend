@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,16 @@ public class Historique_carnetController {
 	public List <Historique_carnet> getPremiersHistorique(){
 		 return historiqueservice.findPremiersHistoriques();
 	}
-	@GetMapping("/gethistoriquebyVehicule/vehicule")
-	public List <Historique_carnet> getHistoriqueByVehicule(@PathVariable Vehicule vehicule){
-		 return historiqueservice.findHistoriqueByVehicule(vehicule);
+	@GetMapping("/gethistoriquebyVehicule/{id}")
+	public List <Historique_carnet> getHistoriqueByVehicule(@PathVariable long id){
+		 return historiqueservice.findHistoriqueByVehicule(id);
 	}
+@DeleteMapping("/deletehistorique/{idhistorique}")
+	
+	public String removehistorique(@PathVariable(value = "idhistorique") long idhistorique) {
+	 
+	  
+			return historiqueservice.deletehistorique(idhistorique);
+			
+		}
 }

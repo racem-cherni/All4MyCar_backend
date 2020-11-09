@@ -974,4 +974,39 @@ public class CarnetentretienServiceImpl implements CarnetentretienService {
 		return stm;
 	}
 
+	@Override
+	public String delete_carburant(long idcarburant) {
+		Carburant_Carnet c = carburantrepository.findById(idcarburant).get();
+		carburantrepository.delete(c);
+		return "carburant supprimée";
+	}
+
+	@Override
+	public String delete_depense(long iddepense) {
+		Depense_carnet d = depenserepository.findById(iddepense).get();
+		depenserepository.delete(d);
+		return "depense supprimé";
+	}
+
+	@Override
+	public String delete_entretien(long identretien) {
+		Entretien_Carnet e = entretienrepository.findById(identretien).get();
+		entretienrepository.delete(e);
+		return "entretien supprimé" ;
+	}
+
+	@Override
+	public String delete_trajet(long idtrajet) {
+		Trajet_carnet t = trajetrepository.findById(idtrajet).get();
+		trajetrepository.delete(t);
+		return "trajet supprimé";
+	}
+
+	@Override
+	public String delete_odometer(long idodometer) {
+		Odometer_carnet o = odometerrepository.findById(idodometer).get();
+		odometerrepository.delete(o);
+		return "odometer suppriméé";
+	}
+
 }

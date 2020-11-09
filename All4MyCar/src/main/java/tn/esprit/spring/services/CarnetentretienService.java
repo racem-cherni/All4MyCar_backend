@@ -14,14 +14,25 @@ import tn.esprit.spring.models.Vehicule;
 public interface CarnetentretienService {
 
 	String ajouter_carburant(Carburant_Carnet c);
+	
+	String delete_carburant(long idcarburant);
+
 
 	String ajouter_depense(Depense_carnet d);
+	String delete_depense(long iddepense);
+
 
 	String ajouter_entretien(Entretien_Carnet e);
+	String delete_entretien(long identretien);
+
 
 	String ajouter_trajet(Trajet_carnet t) throws ParseException;
+	String delete_trajet(long idtrajet);
+
 	public Date addoneHour (Date heure) throws ParseException;
 	String ajouter_odometer(Odometer_carnet o);
+	String delete_odometer(long idodometer);
+
 	
 List<Carburant_Carnet>  findCarburant(Vehicule vehicule);
 

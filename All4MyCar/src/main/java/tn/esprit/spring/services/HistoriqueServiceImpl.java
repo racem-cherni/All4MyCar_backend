@@ -28,9 +28,16 @@ ClientService clientservice;
 		return historiquerepository.findPremiersHistorique();
 	}
 	@Override
-	public List<Historique_carnet> findHistoriqueByVehicule(Vehicule vehicule) {
+	public List<Historique_carnet> findHistoriqueByVehicule(long id) {
 		
-	return historiquerepository.findByVehicule(vehicule);
+	return historiquerepository.findByVehiculeId(id);
+	}
+	@Override
+	public String deletehistorique(long idhistorique) {
+		Historique_carnet his = historiquerepository.findById(idhistorique).get() ;
+		historiquerepository.delete(his);
+		return "historique supprimé";
+
 	}
 
 }

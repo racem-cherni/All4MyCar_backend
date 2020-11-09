@@ -8,5 +8,6 @@ import tn.esprit.spring.models.Vehicule;
 public interface HistoriqueService {
 	List<Historique_carnet> findAllHistorique();
 	List <Historique_carnet> findPremiersHistoriques();
-List<Historique_carnet> findHistoriqueByVehicule(Vehicule vehicule);
+List<Historique_carnet> findHistoriqueByVehicule(long id);
+String   deletehistorique (long idhistorique);
 }

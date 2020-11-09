@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,51 @@ public class CarnetentretienController {
 	public String ajouter_odometer(@RequestBody Odometer_carnet o) {
 		
 		return carnetservice.ajouter_odometer(o);
+	}
+	
+@DeleteMapping("/deletecarburant/{idcarburant}")
+	
+	public String removecarburant(@PathVariable(value = "idcarburant") long idcarburant) {
+	 
+	  
+			return carnetservice.delete_carburant(idcarburant);
+			
+		}
+
+@DeleteMapping("/deleteentretien/{identretien}")
+
+public String removeentretien(@PathVariable(value = "identretien") long identretien) {
+ 
+  
+		return carnetservice.delete_entretien(identretien);
+		
+	}
+
+@DeleteMapping("/deletetrajet/{idtrajet}")
+
+public String removetrajet(@PathVariable(value = "idtrajet") long idtrajet) {
+ 
+  
+		return carnetservice.delete_trajet(idtrajet);
+		
+	}
+
+@DeleteMapping("/deleteodometer/{idodometer}")
+
+public String removeodometer(@PathVariable(value = "idodometer") long idodometer) {
+ 
+  
+		return carnetservice.delete_odometer(idodometer);
+		
+	}
+
+@DeleteMapping("/deletedepense/{iddepense}")
+
+public String removedepense(@PathVariable(value = "iddepense") long iddepense) {
+ 
+  
+		return carnetservice.delete_depense(iddepense);
+		
 	}
 	
 	
